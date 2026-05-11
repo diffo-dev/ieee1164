@@ -10,25 +10,38 @@ defmodule Ieee1164.MixProject do
       version: "0.1.0",
       elixir: "~> 1.18",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      docs: docs()
     ]
   end
 
-  # Run "mix help compile.app" to learn about applications.
   def application do
     [
       extra_applications: [:logger]
     ]
   end
 
-  # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
       {:artefact_kino, "~> 0.2"},
-      {:artefact, "~> 0.2"},
+      #{:artefact, "~> 0.2.1"}, # on https://github.com/diffo-dev/artefactory/issues/38
+      {:artefact, path: "../artefactory/artefact", override: true},
+      {:ex_doc, "~> 0.34", only: :dev, runtime: false},
       {:igniter, "~> 0.6", only: [:dev, :test]}
-      # {:dep_from_hexpm, "~> 0.3.0"},
-      # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
+    ]
+  end
+
+  defp docs do
+    [
+      main: "readme",
+      extras: [
+        "README.md": [title: "README"],
+        "docs/mix_tasks.md": [title: "Mix Tasks"],
+        "docs/backgrounds.md": [title: "Print Specifications"]
+      ],
+      groups_for_extras: [
+        Guides: ["docs/mix_tasks.md", "docs/backgrounds.md"]
+      ]
     ]
   end
 end
