@@ -28,7 +28,7 @@ defmodule Mix.Tasks.Ieee1164.Compile do
     Mix.Task.run("app.start")
     File.mkdir_p!(@out)
 
-    sections = Diffo.Ieee1164.yarn() |> Keyword.keys()
+    sections = Diffo.Ieee1164.yarn() |> Enum.map(fn {_, [{key, _}]} -> key end)
 
     for key <- sections do
       artefact = apply(Diffo.Ieee1164, key, [])
