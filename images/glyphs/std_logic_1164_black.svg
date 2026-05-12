@@ -9,10 +9,10 @@
              xmlns:dc="http://purl.org/dc/elements/1.1/"
              xmlns:cc="http://creativecommons.org/ns#">
       <cc:Work rdf:about="">
-        <dc:title>std_logic_1164 glyph</dc:title>
+        <dc:title>std_logic_1164 glyph — Dark Mode</dc:title>
         <dc:creator>diffo-dev</dc:creator>
         <dc:date>2026</dc:date>
-        <dc:description>IEEE 1164 std_logic knowledge glyph — the resolution relationships of the nine-value logic family, rendered as a symmetric matrix glyph.</dc:description>
+        <dc:description>IEEE 1164 std_logic knowledge glyph — resolution relationships of the nine-value logic family as a symmetric matrix. Dark mode palette. Era: known recently.</dc:description>
         <dc:rights>Copyright 2026 diffo-dev</dc:rights>
         <cc:license rdf:resource="https://creativecommons.org/licenses/by-nc-nd/4.0/"/>
       </cc:Work>
