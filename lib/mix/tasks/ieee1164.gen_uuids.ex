@@ -25,7 +25,7 @@ defmodule Mix.Tasks.Ieee1164.GenUuids do
 
     names =
       Diffo.Ieee1164.yarn()
-      |> Enum.flat_map(fn {_key, text} ->
+      |> Enum.flat_map(fn {_title, [{_key, text}]} ->
         Regex.scan(~r/name:\s*"([^"]+)"/, text)
         |> Enum.map(fn [_, name] -> name end)
       end)
