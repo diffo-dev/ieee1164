@@ -1,0 +1,144 @@
+# Yarning with IEEE 1164
+
+## Section
+
+```elixir
+Mix.install([
+  {:ieee1164, path: "/Users/beanlanda/git/ieee1164", override: true},
+  {:kino, "~> 0.13"}
+])
+```
+
+---
+
+## Before we begin
+
+IEEE 1164 has been part of digital hardware design since 1993. It defines the logic values that flow through VHDL simulations — the nine states of `std_ulogic`, the resolution of `std_logic`, the operations that govern them.
+
+This livebook lets IEEE 1164 tell its own story, one chapter at a time.
+
+On the **left**: what this chapter introduces.
+On the **right**: everything heard so far, growing.
+
+Press **Next chapter →** to advance. There is no hurry.
+
+```elixir
+sections   = Diffo.Ieee1164.stream() |> Enum.to_list()
+integrated = Diffo.Ieee1164.stream_integrated() |> Enum.to_list()
+:ready
+```
+
+---
+
+## The yarn
+
+```elixir
+entries = [
+  {:chapter, "Welcome to the land of IEEE 1164",
+   "A standard introduces itself. Not with values or operations — with declarations. IEEE 1164 names what it will define: signal, value, resolution, operation, world, transition. The country is named before it is entered.",
+   0},
+  {:chapter, "My signals live here",
+   "The signal family is named. `std_ulogic` is introduced — what a driver actually drives. `std_logic` is introduced beside it. `std_logic_vector` scales it. And a quiet relationship is stated: `std_ulogic` resolves to `std_logic`.\n\nWe hear the names. We do not yet know what they mean.",
+   1},
+  {:chapter, "My signal's children are values",
+   "Nine names are given. They hang beneath `value` — enumerated, present, but not yet speaking. U, X, 0, 1, Z, W, L, H, and —. Their existence is declared before their character is known.",
+   2},
+  {:chapter, "The values each have character",
+   "> *\"I am unknown.\"*\n> *\"I am unknowable.\"*\n> *\"I am twin brother of 1.\"*\n> *\"I am twin brother of 0.\"*\n> *\"I am you unchanged.\"*\n> *\"I can be you unchanged.\"*\n> *\"I am twin sister of H.\"*\n> *\"I am twin sister of L.\"*\n> *\"I am anyone.\"*",
+   3},
+  {:chapter, "Some values are twinned: conflicting or yielding",
+   "Not all values can share a wire peacefully. 1 and 0 conflict. H and L conflict. Some yield — `-` yields to `U`, `Z` yields to all. The wire is not a neutral place.",
+   4},
+  {:chapter, "Some values impose their strength",
+   "`0` forces `L` and `W`. `1` forces `H` and `W`. `X` poisons. `U` propagates. `W` weakly forces. `-` poisons. Some voices drown out others not through conflict, but through sheer weight.",
+   5},
+  {:chapter, "Some values remain true to self",
+   "Under resolution, some values do not change. `0` resolved against itself is `0`. `1` against `1` is `1`. `W`, `L`, `H` — each remains itself. Identity is its own kind of strength.",
+   6},
+  {:chapter, "Sometimes uncles must resolve things",
+   "Conflict is not failure. It is an opportunity to resolve. `forces` speaks loudest. `weakly_forces` speaks loudly but yields. `unknown_overrides_known` spreads uncertainty. `strength_overrides_conflict` brings order.\n\nAnd now, having seen what resolution does — we hear again what was said in signals: `std_ulogic` resolves to `std_logic`. The first time, it was a name. Now it is understood.",
+   7},
+  {:chapter, "There are actually two clans",
+   "Having learned the values and their resolution, a pattern becomes visible. Four values are knowable — `0`, `1`, `L`, `H`. Five are unknowable — `U`, `X`, `Z`, `W`, `-`. This is not declared at the beginning. It is seen only after the journey.",
+   8},
+  {:chapter, "But we get things done",
+   "Four operations. NOT reveals the opposite. AND knows zero speaks loudest. OR knows one speaks loudest. XOR knows the difference — same is silence, different is voice.",
+   9},
+  {:chapter, "And this is how",
+   "NOT inverts the knowable. NOT reflects the unknowable. NOT resolves `Z`, `W`, `-` to X. AND is dominated by `0` and `L`. OR is dominated by `1` and `H`. XOR is silenced by sameness.",
+   10},
+  {:chapter, "We know of other worlds",
+   "Not everyone needs all nine values. IEEE 1164 offers worlds — each a projection of the full nine into a simpler space. `std_logic_world` holds all nine. `x01_world` keeps certainty. `x01z_world` keeps high impedance. `ux01_world` keeps the uninitialised. `bit_world` keeps only two.",
+   11},
+  {:chapter, "And we can pass between them as they are one",
+   "`std_logic_world` projects to all others. `x01_world` projects to `bit_world`. `L` survives as `0`. `H` survives as `1`. `Z` survives only in `x01z_world`. `U` survives only in `ux01_world`. `W` and `-` collapse to X everywhere.\n\nThe worlds are not separate. They are views of the same truth.\n\nAnd here — the signal family comes fully into view. `std_logic` is the resolved world. `std_logic_vector` scales it across many wires. The family is complete.",
+   12},
+  {:chapter, "We live in the moment",
+   "`departing` is what you were. `arriving` is what you are becoming. `rising_edge` and `falling_edge` read both — they see through the strength of values to the moment of change. They use `to_x01` to know clearly, then speak only when the transition is real.",
+   13},
+  {:pause, "The knowledge so far",
+   "Fourteen chapters. The full vocabulary of IEEE 1164 — signals, values, character, conflict, strength, identity, resolution, the two clans, operations, worlds, projections, transitions. Everything except the gift that makes it useful.",
+   13},
+  {:milestone, "An invitation",
+   "`std_ulogic` — what a driver drives. Nine possible values. Each with character, conflict, strength, and identity. Resolution that produces `std_logic`. Operations that reason over those values. Worlds that simplify them. Edges that catch the moment of change.\n\nThis is a complete language for describing digital logic in simulation. `std_logic_vector` scales it across buses. A counter, a state machine, a FIFO, a processor — all of it lives in this vocabulary.\n\nAnd one thing more is coming.",
+   nil},
+  {:chapter, "Let's create together",
+   "This is where diffo joins the yarn.\n\nIEEE 1164 gave us everything else. Synchronicity is the gift that makes it useful — the clock that marks the moment of knowing. The heartbeat that governs what is sampled, what is held, what belongs to a domain.\n\n*With one breath, with one flow, you will know synchronicity.*",
+   14},
+  {:finale, "The complete knowledge",
+   "The full vocabulary, integrated. Signal, value, character, conflict, strength, identity, resolution, the two clans, operations, worlds, projections, transitions, synchronicity.",
+   14}
+]
+
+button = Kino.Control.button("Next chapter →")
+frame  = Kino.Frame.new()
+
+# Kill any previous listener from a prior evaluation of this cell.
+if pid = Process.whereis(:yarn_listener), do: Process.exit(pid, :kill)
+
+# Run the event loop in a separate process so the evaluator is not blocked.
+# The closure captures entries, sections, integrated, and frame by value.
+{:ok, pid} = Task.start(fn ->
+  Enum.reduce(Kino.Control.stream(button), 0, fn _click, i ->
+    case Enum.at(entries, i) do
+      nil ->
+        i
+
+      {:chapter, title, prose, idx} ->
+        integrated_artefact = %{Enum.at(integrated, idx) | title: "IEEE1164 integrating: #{title}"}
+        Kino.Frame.render(frame, Kino.Layout.grid([
+          Kino.Markdown.new("## #{title}\n\n#{prose}"),
+          Kino.Layout.grid([
+            ArtefactKino.new(Enum.at(sections, idx)),
+            ArtefactKino.new(integrated_artefact)
+          ], columns: 2)
+        ], columns: 1))
+        i + 1
+
+      {:pause, title, prose, idx} ->
+        integrated_artefact = %{Enum.at(integrated, idx) | title: "IEEE1164: #{title}"}
+        Kino.Frame.render(frame, Kino.Layout.grid([
+          Kino.Markdown.new("---\n\n## #{title}\n\n#{prose}"),
+          ArtefactKino.new(integrated_artefact)
+        ], columns: 1))
+        i + 1
+
+      {:milestone, title, prose, _} ->
+        Kino.Frame.render(frame, Kino.Markdown.new("---\n\n## #{title}\n\n#{prose}\n\n---"))
+        i + 1
+
+      {:finale, title, prose, idx} ->
+        integrated_artefact = %{Enum.at(integrated, idx) | title: "IEEE1164: #{title}"}
+        Kino.Frame.render(frame, Kino.Layout.grid([
+          Kino.Markdown.new("---\n\n## #{title}\n\n#{prose}"),
+          ArtefactKino.new(integrated_artefact)
+        ], columns: 1))
+        i + 1
+    end
+  end)
+end)
+
+Process.register(pid, :yarn_listener)
+
+Kino.Layout.grid([button, frame], columns: 1)
+```

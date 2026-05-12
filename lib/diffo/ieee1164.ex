@@ -300,6 +300,7 @@ defmodule Diffo.Ieee1164 do
       Stream.transform(rest, initial, fn {title, [{_key, text}]}, acc ->
         section = Parser.parse(text, title: title, description: text)
         next = Artefact.combine!(acc, offset_rel_ids(section, length(acc.graph.relationships)))
+        next = %{next | title: "IEEE1164 integrating: #{title}"}
         {[next], next}
       end)
 
