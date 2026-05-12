@@ -4,16 +4,33 @@
 defmodule Diffo.Ieee1164Test do
   use ExUnit.Case
 
-  test "yarn/0 returns all sections" do
-    keys = Diffo.Ieee1164.yarn() |> Keyword.keys()
-    assert keys == [:standard, :signals, :values, :resolutions, :operations, :projections, :transitions, :synchronicity]
+  test "yarn/0 returns all sections in order" do
+    keys = Diffo.Ieee1164.yarn() |> Enum.map(fn {_, [{key, _}]} -> key end)
+
+    assert keys == [
+             :standard,
+             :signals,
+             :values,
+             :character,
+             :pairwise,
+             :strength,
+             :identity_under_resolution,
+             :resolutions,
+             :is_x,
+             :operations,
+             :logic_operations,
+             :worlds,
+             :projections,
+             :transitions,
+             :synchronicity
+           ]
   end
 
   test "each section parses to an artefact" do
     Diffo.Ieee1164.yarn()
-    |> Enum.each(fn {key, _} ->
+    |> Enum.each(fn {title, [{key, _}]} ->
       artefact = apply(Diffo.Ieee1164, key, [])
-      assert Artefact.is_valid?(artefact), "#{key} artefact is not valid"
+      assert Artefact.is_valid?(artefact), "#{title} (#{key}) artefact is not valid"
     end)
   end
 
@@ -24,7 +41,7 @@ defmodule Diffo.Ieee1164Test do
     # Every node from every section survives into the integrated artefact.
     section_node_names =
       Diffo.Ieee1164.yarn()
-      |> Enum.flat_map(fn {key, _} ->
+      |> Enum.flat_map(fn {_, [{key, _}]} ->
         artefact = apply(Diffo.Ieee1164, key, [])
         Enum.map(artefact.graph.nodes, & &1.properties["name"])
       end)
@@ -46,8 +63,8 @@ defmodule Diffo.Ieee1164Test do
   test "compile task writes valid binary artefacts to priv/diffo/ieee1164/" do
     out = Path.join([:code.priv_dir(:ieee1164) |> to_string(), "diffo", "ieee1164"])
 
-    expected =
-      ["ieee1164.bin" | Diffo.Ieee1164.yarn() |> Keyword.keys() |> Enum.map(&"#{&1}.bin")]
+    section_bins = Diffo.Ieee1164.yarn() |> Enum.map(fn {_, [{key, _}]} -> "#{key}.bin" end)
+    expected = ["ieee1164.bin" | section_bins]
 
     for filename <- expected do
       path = Path.join(out, filename)

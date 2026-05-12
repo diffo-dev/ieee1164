@@ -8,10 +8,10 @@ defmodule Diffo.Ieee1164 do
 
   Each section of the yarn is both readable source and a callable function
   returning a self-contained `%Artefact{}`. The title of each artefact is
-  derived from its section key; the description is the yarn itself.
+  derived from its section key; the description is a summary.
 
   `ieee1164/0` pipelines all sections into the full combined artefact.
-  `yarn/0` returns the raw Cypher strings for inspection or other tooling.
+  `yarn/0` returns the raw sections for inspection or other tooling.
   """
 
   require Artefact
@@ -37,6 +37,18 @@ defmodule Diffo.Ieee1164 do
   |
 
   @values ~S|
+    (VALUE:{name: "value"}) <- [ENUMERATES] - (VALUE:{name: "U"})
+    (VALUE:{name: "value"}) <- [ENUMERATES] - (VALUE:{name: "X"})
+    (VALUE:{name: "value"}) <- [ENUMERATES] - (VALUE:{name: "0"})
+    (VALUE:{name: "value"}) <- [ENUMERATES] - (VALUE:{name: "1"})
+    (VALUE:{name: "value"}) <- [ENUMERATES] - (VALUE:{name: "Z"})
+    (VALUE:{name: "value"}) <- [ENUMERATES] - (VALUE:{name: "W"})
+    (VALUE:{name: "value"}) <- [ENUMERATES] - (VALUE:{name: "L"})
+    (VALUE:{name: "value"}) <- [ENUMERATES] - (VALUE:{name: "H"})
+    (VALUE:{name: "value"}) <- [ENUMERATES] - (VALUE:{name: "-"})
+  |
+
+  @character ~S|
     (VALUE:{name: "value"}) <- [ENUMERATES] - (VALUE:{name: "U", description: "I am unknown"})
     (VALUE:{name: "value"}) <- [ENUMERATES] - (VALUE:{name: "X", description: "I am unknowable"})
     (VALUE:{name: "value"}) <- [ENUMERATES] - (VALUE:{name: "0", description: "I am twin brother of 1"})
@@ -46,21 +58,30 @@ defmodule Diffo.Ieee1164 do
     (VALUE:{name: "value"}) <- [ENUMERATES] - (VALUE:{name: "L", description: "I am twin sister of H"})
     (VALUE:{name: "value"}) <- [ENUMERATES] - (VALUE:{name: "H", description: "I am twin sister of L"})
     (VALUE:{name: "value"}) <- [ENUMERATES] - (VALUE:{name: "-", description: "I am anyone"})
+  |
+
+  @pairwise ~S|
     (VALUE:{name: "H"}) - [CONFLICTS_WITH] -> (VALUE:{name: "L"})
     (VALUE:{name: "1"}) - [CONFLICTS_WITH] -> (VALUE:{name: "0"})
+    (VALUE:{name: "0"}) - [CONFLICTS_WITH] -> (VALUE:{name: "H"})
+    (VALUE:{name: "1"}) - [CONFLICTS_WITH] -> (VALUE:{name: "L"})
     (VALUE:{name: "-"}) - [YIELDS_TO] -> (VALUE:{name: "U"})
     (VALUE:{name: "Z"}) - [YIELDS_TO] -> (VALUE:{name: "value"})
+  |
+
+  @strength ~S|
     (VALUE:{name: "0"}) - [FORCES] -> (VALUE:{name: "L"})
     (VALUE:{name: "0"}) - [FORCES] -> (VALUE:{name: "W"})
-    (VALUE:{name: "0"}) - [CONFLICTS_WITH] -> (VALUE:{name: "H"})
     (VALUE:{name: "1"}) - [FORCES] -> (VALUE:{name: "H"})
     (VALUE:{name: "1"}) - [FORCES] -> (VALUE:{name: "W"})
-    (VALUE:{name: "1"}) - [CONFLICTS_WITH] -> (VALUE:{name: "L"})
     (VALUE:{name: "X"}) - [POISONS] -> (VALUE:{name: "value"})
     (VALUE:{name: "W"}) - [WEAKLY_FORCES] -> (VALUE:{name: "L"})
     (VALUE:{name: "W"}) - [WEAKLY_FORCES] -> (VALUE:{name: "H"})
     (VALUE:{name: "U"}) - [PROPAGATES] -> (VALUE:{name: "value"})
     (VALUE:{name: "-"}) - [POISONS] -> (VALUE:{name: "value"})
+  |
+
+  @identity_under_resolution ~S|
     (VALUE:{name: "0"}) - [REMAINS_SELF] -> (VALUE:{name: "0"})
     (VALUE:{name: "1"}) - [REMAINS_SELF] -> (VALUE:{name: "1"})
     (VALUE:{name: "W"}) - [REMAINS_SELF] -> (VALUE:{name: "W"})
@@ -75,6 +96,19 @@ defmodule Diffo.Ieee1164 do
     (RESOLUTION:{name: "resolution"}) <- [ENUMERATES] - (RESOLUTION:{name: "unknown_overrides_known", description: "I spread uncertainty"})
     (RESOLUTION:{name: "resolution"}) <- [ENUMERATES] - (RESOLUTION:{name: "strength_overrides_conflict", description: "I resolve conflict"})
     (RESOLUTION:{name: "unknown_overrides_known"}) - [CONFLICTS_WITH] -> (RESOLUTION:{name: "strength_overrides_conflict"})
+    (SIGNAL:{name: "std_ulogic"}) - [RESOLVES_TO] -> (SIGNAL:{name: "std_logic"})
+  |
+
+  @is_x ~S|
+    (VALUE:{name: "0"}) - [KNOWABLE] -> (VALUE:{name: "value"})
+    (VALUE:{name: "1"}) - [KNOWABLE] -> (VALUE:{name: "value"})
+    (VALUE:{name: "L"}) - [KNOWABLE] -> (VALUE:{name: "value"})
+    (VALUE:{name: "H"}) - [KNOWABLE] -> (VALUE:{name: "value"})
+    (VALUE:{name: "U"}) - [UNKNOWABLE] -> (VALUE:{name: "value"})
+    (VALUE:{name: "X"}) - [UNKNOWABLE] -> (VALUE:{name: "value"})
+    (VALUE:{name: "Z"}) - [UNKNOWABLE] -> (VALUE:{name: "value"})
+    (VALUE:{name: "W"}) - [UNKNOWABLE] -> (VALUE:{name: "value"})
+    (VALUE:{name: "-"}) - [UNKNOWABLE] -> (VALUE:{name: "value"})
   |
 
   @operations ~S|
@@ -82,6 +116,9 @@ defmodule Diffo.Ieee1164 do
     (OPERATION:{name: "operation"}) <- [ENUMERATES] - (OPERATION:{name: "AND", description: "I know zero speaks loudest. Show me one zero and I will silence everything."})
     (OPERATION:{name: "operation"}) <- [ENUMERATES] - (OPERATION:{name: "OR", description: "I know one speaks loudest. Show me one one and I will carry it forward."})
     (OPERATION:{name: "operation"}) <- [ENUMERATES] - (OPERATION:{name: "XOR", description: "I know the difference. Same is silence, different is voice."})
+  |
+
+  @logic_operations ~S|
     (OPERATION:{name: "NOT"}) - [INVERTS] -> (VALUE:{name: "0"})
     (OPERATION:{name: "NOT"}) - [INVERTS] -> (VALUE:{name: "1"})
     (OPERATION:{name: "NOT"}) - [INVERTS] -> (VALUE:{name: "L"})
@@ -96,26 +133,20 @@ defmodule Diffo.Ieee1164 do
     (OPERATION:{name: "OR"}) - [DOMINATED_BY] -> (VALUE:{name: "1"})
     (OPERATION:{name: "OR"}) - [DOMINATED_BY] -> (VALUE:{name: "H"})
     (OPERATION:{name: "XOR"}) - [SILENCED_BY_SAMENESS] -> (VALUE:{name: "value"})
-    (VALUE:{name: "0"}) - [KNOWABLE] -> (VALUE:{name: "value"})
-    (VALUE:{name: "1"}) - [KNOWABLE] -> (VALUE:{name: "value"})
-    (VALUE:{name: "L"}) - [KNOWABLE] -> (VALUE:{name: "value"})
-    (VALUE:{name: "H"}) - [KNOWABLE] -> (VALUE:{name: "value"})
-    (VALUE:{name: "U"}) - [UNKNOWABLE] -> (VALUE:{name: "value"})
-    (VALUE:{name: "X"}) - [UNKNOWABLE] -> (VALUE:{name: "value"})
-    (VALUE:{name: "Z"}) - [UNKNOWABLE] -> (VALUE:{name: "value"})
-    (VALUE:{name: "W"}) - [UNKNOWABLE] -> (VALUE:{name: "value"})
-    (VALUE:{name: "-"}) - [UNKNOWABLE] -> (VALUE:{name: "value"})
+  |
+
+  @worlds ~S|
+    (WORLD:{name: "world"}) <- [ENUMERATES] - (WORLD:{name: "bit_world", description: "I am the oldest world. Two values. True and false."})
+    (WORLD:{name: "world"}) <- [ENUMERATES] - (WORLD:{name: "x01_world", description: "I am the synthesis world. I keep certainty and name the rest unknowable."})
+    (WORLD:{name: "world"}) <- [ENUMERATES] - (WORLD:{name: "x01z_world", description: "I am the tristate world. I keep the silence of high impedance."})
+    (WORLD:{name: "world"}) <- [ENUMERATES] - (WORLD:{name: "ux01_world", description: "I am the reset world. I keep the memory of uninitialised."})
+    (WORLD:{name: "world"}) <- [ENUMERATES] - (WORLD:{name: "std_logic_world", description: "I am the simulation world. I hold all nine."})
   |
 
   @projections ~S|
     (OPERATION:{name: "to_x01"}) - [COLLAPSES_TO] -> (OPERATION:{name: "operation"})
     (OPERATION:{name: "to_x01z"}) - [COLLAPSES_TO] -> (OPERATION:{name: "operation"})
     (OPERATION:{name: "to_ux01"}) - [COLLAPSES_TO] -> (OPERATION:{name: "operation"})
-    (WORLD:{name: "world"}) <- [ENUMERATES] - (WORLD:{name: "bit_world", description: "I am the oldest world. Two values. True and false."})
-    (WORLD:{name: "world"}) <- [ENUMERATES] - (WORLD:{name: "x01_world", description: "I am the synthesis world. I keep certainty and name the rest unknowable."})
-    (WORLD:{name: "world"}) <- [ENUMERATES] - (WORLD:{name: "x01z_world", description: "I am the tristate world. I keep the silence of high impedance."})
-    (WORLD:{name: "world"}) <- [ENUMERATES] - (WORLD:{name: "ux01_world", description: "I am the reset world. I keep the memory of uninitialised."})
-    (WORLD:{name: "world"}) <- [ENUMERATES] - (WORLD:{name: "std_logic_world", description: "I am the simulation world. I hold all nine."})
     (WORLD:{name: "std_logic_world"}) - [PROJECTS_TO] -> (WORLD:{name: "x01_world"})
     (WORLD:{name: "std_logic_world"}) - [PROJECTS_TO] -> (WORLD:{name: "x01z_world"})
     (WORLD:{name: "std_logic_world"}) - [PROJECTS_TO] -> (WORLD:{name: "ux01_world"})
@@ -162,42 +193,58 @@ defmodule Diffo.Ieee1164 do
   # ─── Yarn as text ───────────────────────────────────────────────────────
 
   @doc """
-  The raw Cypher-style yarn strings, keyed by section.
-  Each key names the artefact; each value is the yarn and its description.
+  The raw Cypher-style yarn, in the order the story is told.
+
+  Each entry is `{title, [key: cypher_text]}` — the human sentence that names
+  the chapter, the section key, and the Cypher source itself.
   """
   def yarn do
     [
-      standard: @standard,
-      signals: @signals,
-      values: @values,
-      resolutions: @resolutions,
-      operations: @operations,
-      projections: @projections,
-      transitions: @transitions,
-      synchronicity: @synchronicity
+      {"Welcome to the land of IEEE1164", standard: @standard},
+      {"My signals live here", signals: @signals},
+      {"My signal's children are values", values: @values},
+      {"The values each have character", character: @character},
+      {"Some values are twinned: conflicting or yielding", pairwise: @pairwise},
+      {"Some values impose their strength", strength: @strength},
+      {"Some values remain true to self", identity_under_resolution: @identity_under_resolution},
+      {"Sometimes uncles must resolve things", resolutions: @resolutions},
+      {"There are actually two clans", is_x: @is_x},
+      {"But we get things done", operations: @operations},
+      {"And this is how", logic_operations: @logic_operations},
+      {"We know of other worlds", worlds: @worlds},
+      {"And we can pass between them as they are one", projections: @projections},
+      {"We live in the moment", transitions: @transitions},
+      {"Let's create together", synchronicity: @synchronicity}
     ]
   end
 
   # ─── Artefacts by section ───────────────────────────────────────────────
 
   defp section(key) do
-    text = yarn()[key]
-    Parser.parse(text, title: to_string(key), description: text)
+    {title, [{^key, text}]} = Enum.find(yarn(), fn {_, [{k, _}]} -> k == key end)
+    Parser.parse(text, title: title, description: text)
   end
 
-  def standard,      do: section(:standard)
-  def signals,       do: section(:signals)
-  def values,        do: section(:values)
-  def resolutions,   do: section(:resolutions)
-  def operations,    do: section(:operations)
-  def projections,   do: section(:projections)
-  def transitions,   do: section(:transitions)
+  def standard, do: section(:standard)
+  def signals, do: section(:signals)
+  def values, do: section(:values)
+  def character, do: section(:character)
+  def pairwise, do: section(:pairwise)
+  def strength, do: section(:strength)
+  def identity_under_resolution, do: section(:identity_under_resolution)
+  def resolutions, do: section(:resolutions)
+  def is_x, do: section(:is_x)
+  def operations, do: section(:operations)
+  def logic_operations, do: section(:logic_operations)
+  def worlds, do: section(:worlds)
+  def projections, do: section(:projections)
+  def transitions, do: section(:transitions)
   def synchronicity, do: section(:synchronicity)
 
   # ─── Load from priv ─────────────────────────────────────────────────────
 
   @doc """
-  Load a pre-compiled section artefact from `priv/artefacts/<key>.bin`.
+  Load a pre-compiled section artefact from `priv/diffo/ieee1164/<key>.bin`.
 
   Run `mix ieee1164.compile` to produce the files. Raises if missing.
   """
@@ -206,7 +253,7 @@ defmodule Diffo.Ieee1164 do
   end
 
   @doc """
-  Load the fully combined ieee1164 artefact from `priv/artefacts/ieee1164.bin`.
+  Load the fully combined ieee1164 artefact from `priv/diffo/ieee1164/ieee1164.bin`.
   """
   def load_ieee1164 do
     priv_path("ieee1164.bin") |> File.read!() |> :erlang.binary_to_term()
@@ -228,13 +275,12 @@ defmodule Diffo.Ieee1164 do
   A stream of section artefacts in yarn order, parsed lazily.
 
   Each element is a self-contained `%Artefact{}` for that section.
-  Pull one at a time, or map/filter across the whole yarn.
 
       Diffo.Ieee1164.stream() |> Enum.take(3)
   """
   def stream do
-    Stream.map(yarn(), fn {key, text} ->
-      Parser.parse(text, title: to_string(key), description: text)
+    Stream.map(yarn(), fn {title, [{_key, text}]} ->
+      Parser.parse(text, title: title, description: text)
     end)
   end
 
@@ -247,12 +293,12 @@ defmodule Diffo.Ieee1164 do
       Diffo.Ieee1164.stream_integrated() |> Enum.each(&inspect/1)
   """
   def stream_integrated do
-    [{first, text} | rest] = yarn()
-    initial = Parser.parse(text, title: to_string(first), description: text)
+    [{first_title, [{_key, first_text}]} | rest] = yarn()
+    initial = Parser.parse(first_text, title: first_title, description: first_text)
 
     rest_stream =
-      Stream.transform(rest, initial, fn {key, text}, acc ->
-        section = Parser.parse(text, title: to_string(key), description: text)
+      Stream.transform(rest, initial, fn {title, [{_key, text}]}, acc ->
+        section = Parser.parse(text, title: title, description: text)
         next = Artefact.combine!(acc, offset_rel_ids(section, length(acc.graph.relationships)))
         {[next], next}
       end)
