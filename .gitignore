@@ -21,3 +21,7 @@ ieee1164-*.tar
 
 # Temporary files, for example, from tests.
 /tmp/
+
+# Agent related compiled skills and guideance via usage_rules
+.claude
+CLAUDE.md

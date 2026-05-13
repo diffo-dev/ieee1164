@@ -11,9 +11,29 @@ defmodule Ieee1164.MixProject do
       elixir: "~> 1.18",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
-      docs: docs()
+      docs: docs(),
+      usage_rules: usage_rules()
     ]
   end
+
+        defp usage_rules do
+        # Example for those using claude.
+        [
+          file: "CLAUDE.md",
+          # rules to include directly in CLAUDE.md
+          usage_rules: ["usage_rules:all"],
+          skills: [
+            location: ".claude/skills",
+            # build skills that combine multiple usage rules
+            build: [
+              artefactory: [
+                description: "Use this skill working when working with Artefact or Artefactory (doing Artefacture)",
+                usage_rules: [:artefact]
+              ]
+            ]
+          ]
+        ]
+      end
 
   def application do
     [
@@ -23,6 +43,7 @@ defmodule Ieee1164.MixProject do
 
   defp deps do
     [
+      {:usage_rules, "~> 1.0", only: [:dev]},
       {:artefact_kino, "~> 0.3"},
       {:artefact, "~> 0.3"},
       {:ex_doc, "~> 0.34", only: :dev, runtime: false},

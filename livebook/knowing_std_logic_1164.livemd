@@ -6,7 +6,7 @@
 Mix.install([
   #{:ieee1164, "~> 0.1"},
   {:ieee1164, path: "/Users/beanlanda/git/ieee1164", override: true},
-  {:kino, "~> 0.13"},
+  {:kino, "~> 0.13"}
 ])
 ```
 
