@@ -57,6 +57,7 @@ defmodule Ieee1164.MixProject do
       assets: %{"images" => "images"},
       extras: [
         "README.md": [title: "README"],
+        "CHANGELOG.md": [title: "Changelog"],
         "NOTICE.md": [title: "Notice"],
         "docs/mix_tasks.md": [title: "Mix Tasks"],
         "docs/backgrounds.md": [title: "Print Specifications"]

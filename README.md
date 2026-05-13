@@ -77,6 +77,8 @@ end
 
 License notices for code and images separately see [NOTICE](NOTICE.md)
 
+See [CHANGELOG](CHANGELOG.md) for release history.
+
 ## Acknowledgements
 
 Diffo IEEE1164 is new, but the ideas are not. At diffo-dev we are on a journey inspired by Indigenous Systems Thinking and offer our respect and gratitude for the profound wisdom presented by Tyson Yunkaporta in Sand Talk, grounded in countless years of sustainable, harmonious living.
