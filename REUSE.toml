@@ -26,9 +26,9 @@ path = "mix.lock"
 SPDX-FileCopyrightText = "2026 diffo-dev contributors"
 SPDX-License-Identifier = "Apache-2.0"
 
-# Knowledge graph
+# Knowledge graph source and compiled artefacts
 [[annotations]]
-path = "priv/ieee1164.txt"
+path = "priv/diffo/ieee1164/**"
 SPDX-FileCopyrightText = "2026 diffo-dev contributors"
 SPDX-License-Identifier = "Apache-2.0"
 
@@ -51,11 +51,32 @@ SPDX-FileCopyrightText = "2026 diffo-dev contributors"
 SPDX-License-Identifier = "Apache-2.0"
 
 [[annotations]]
-path = "NOTICE"
+path = "NOTICE.md"
+SPDX-FileCopyrightText = "2026 diffo-dev contributors"
+SPDX-License-Identifier = "Apache-2.0"
+
+[[annotations]]
+path = "AGENTS.md"
 SPDX-FileCopyrightText = "2026 diffo-dev contributors"
 SPDX-License-Identifier = "Apache-2.0"
 
 [[annotations]]
 path = "docs/**"
+SPDX-FileCopyrightText = "2026 diffo-dev contributors"
+SPDX-License-Identifier = "Apache-2.0"
+
+[[annotations]]
+path = "livebook/**"
+SPDX-FileCopyrightText = "2026 diffo-dev contributors"
+SPDX-License-Identifier = "Apache-2.0"
+
+# Tooling config — no creative content
+[[annotations]]
+path = ".gitignore"
+SPDX-FileCopyrightText = "2026 diffo-dev contributors"
+SPDX-License-Identifier = "Apache-2.0"
+
+[[annotations]]
+path = ".gitattributes"
 SPDX-FileCopyrightText = "2026 diffo-dev contributors"
 SPDX-License-Identifier = "Apache-2.0"

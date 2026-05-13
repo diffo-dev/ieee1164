@@ -4,6 +4,7 @@
 
 ```elixir
 Mix.install([
+  {:ieee1164, "~> 0.1"},
   {:artefact_kino, "~> 0.3"},
   {:kino, "~> 0.13"}
 ])
