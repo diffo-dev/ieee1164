@@ -299,24 +299,12 @@ defmodule Diffo.Ieee1164 do
     rest_stream =
       Stream.transform(rest, initial, fn {title, [{_key, text}]}, acc ->
         section = Parser.parse(text, title: title, description: text)
-        next = Artefact.combine!(acc, offset_rel_ids(section, length(acc.graph.relationships)))
+        next = Artefact.combine!(acc, section)
         next = %{next | title: "IEEE1164 integrating: #{title}"}
         {[next], next}
       end)
 
     Stream.concat([initial], rest_stream)
-  end
-
-  # Offset relationship ids of a section artefact so they don't clash with
-  # the ids already present in the accumulator when combine! merges them.
-  # Workaround for artefactory#38 — can be removed once that ships.
-  defp offset_rel_ids(artefact, offset) do
-    new_rels =
-      artefact.graph.relationships
-      |> Enum.with_index(offset)
-      |> Enum.map(fn {rel, i} -> %{rel | id: "r#{i}"} end)
-
-    %{artefact | graph: %{artefact.graph | relationships: new_rels}}
   end
 
   # ─── Full pipeline ──────────────────────────────────────────────────────
