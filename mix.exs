@@ -7,7 +7,7 @@ defmodule Ieee1164.MixProject do
   def project do
     [
       app: :ieee1164,
-      version: "0.1.0",
+      version: "0.1.1",
       elixir: "~> 1.18",
       description: "Knowledge about IEEE 1164 — the nine-value logic standard at the heart of VHDL simulation.",
       start_permanent: Mix.env() == :prod,
