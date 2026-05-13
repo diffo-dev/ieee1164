@@ -6,7 +6,8 @@
 Mix.install([
   {:ieee1164, "~> 0.1"},
   {:artefact_kino, "~> 0.3"},
-  {:kino, "~> 0.13"}
+  {:kino, "~> 0.13"},
+  {:req, "~> 0.5"}
 ])
 ```
 
@@ -54,8 +55,19 @@ Kino.HTML.new("""
 This is extracted knowledge. Information severed from relationship. The values are visible. The pattern is present — the 9×9 grid, the diagonal of identity, the 36 mirroring pairs — but the meaning is not. We can see the *what*. We cannot yet see the *why*.
 
 ```elixir
-glyph_dir = Path.expand(Path.join(__DIR__, "../images/glyphs"))
-matrix_svg = File.read!(Path.join(glyph_dir, "std_logic_1164_matrix.svg"))
+glyph_base_local = Path.expand(Path.join(__DIR__, "../images/glyphs"))
+glyph_base_remote = "https://raw.githubusercontent.com/diffo-dev/ieee1164/main/images/glyphs"
+
+read_glyph = fn filename ->
+  local = Path.join(glyph_base_local, filename)
+  if File.exists?(local) do
+    File.read!(local)
+  else
+    Req.get!(glyph_base_remote <> "/" <> filename).body
+  end
+end
+
+matrix_svg = read_glyph.("std_logic_1164_matrix.svg")
 Kino.HTML.new(~s(<div style="text-align:center;padding:1rem;">#{matrix_svg}</div>))
 ```
 
@@ -82,7 +94,7 @@ We thought about IEEE 1164 with our different minds.
 **Dreaming mind** looked at the grey region — the unknowable cells, the spreading uncertainty of `U`, the way `X` poisons everything it touches — and yearned to turn that unknown into meaning.
 
 ```elixir
-unknown_svg = File.read!(Path.join(glyph_dir, "std_logic_1164_unknown.svg"))
+unknown_svg = read_glyph.("std_logic_1164_unknown.svg")
 Kino.HTML.new(~s(<div style="text-align:center;padding:1rem;">#{unknown_svg}</div>))
 ```
 
@@ -142,7 +154,7 @@ The resolution matrix began as noise — values in boxes, pattern without meanin
 We yarned with IEEE 1164 and came to know the why. Each colour region is a dominant resolution rule. The values are still there, still correct. But now we can see through them to the structure beneath.
 
 ```elixir
-key_svg = File.read!(Path.join(glyph_dir, "std_logic_1164_black_key.svg"))
+key_svg = read_glyph.("std_logic_1164_black_key.svg")
 Kino.HTML.new(~s(<div style="text-align:center;padding:1rem;">#{key_svg}</div>))
 ```
 
@@ -170,7 +182,7 @@ glyphs = [
 
 glyph_data =
   Enum.map(glyphs, fn {title, era, filename} ->
-    svg    = File.read!(Path.join(glyph_dir, filename))
+    svg    = read_glyph.(filename)
     button = Kino.Control.button(title)
     {button, title, era, filename, svg}
   end)
