@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:cc="http://creativecommons.org/ns#"
+     viewBox="0 0 560 660" width="560" height="660">
+  <metadata>
+    <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+             xmlns:dc="http://purl.org/dc/elements/1.1/"
+             xmlns:cc="http://creativecommons.org/ns#">
+      <cc:Work rdf:about="">
+        <dc:title>std_logic_1164 glyph — Green Phosphor</dc:title>
+        <dc:creator>diffo-dev</dc:creator>
+        <dc:date>2026</dc:date>
+        <dc:description>IEEE 1164 std_logic knowledge glyph — resolution relationships of the nine-value logic family as a symmetric matrix. Green phosphor terminal palette. Era: known at the terminal.</dc:description>
+        <dc:rights>Copyright 2026 diffo-dev</dc:rights>
+        <cc:license rdf:resource="https://creativecommons.org/licenses/by-nc-nd/4.0/"/>
+      </cc:Work>
+      <cc:License rdf:about="https://creativecommons.org/licenses/by-nc-nd/4.0/">
+        <cc:permits rdf:resource="https://creativecommons.org/ns#Reproduction"/>
+        <cc:permits rdf:resource="https://creativecommons.org/ns#Distribution"/>
+        <cc:requires rdf:resource="https://creativecommons.org/ns#Notice"/>
+        <cc:requires rdf:resource="https://creativecommons.org/ns#Attribution"/>
+        <cc:prohibits rdf:resource="https://creativecommons.org/ns#CommercialUse"/>
+        <cc:prohibits rdf:resource="https://creativecommons.org/ns#DerivativeWorks"/>
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+  <defs>
+    <pattern id="mirror_green_phosphor" patternUnits="userSpaceOnUse" width="12" height="12">
+      <rect width="12" height="12" fill="#1f7a0d"/>
+      <line x1="0" y1="12" x2="12" y2="0" stroke="black" stroke-width="2" stroke-opacity="0.5"/>
+      <line x1="-6" y1="6" x2="6" y2="-6" stroke="black" stroke-width="2" stroke-opacity="0.5"/>
+      <line x1="6" y1="18" x2="18" y2="6" stroke="black" stroke-width="2" stroke-opacity="0.5"/>
+    </pattern>
+  </defs>
+  <rect width="560" height="660" fill="#1a5c0a"/>
+  <text x="280" y="52" text-anchor="middle" font-family="Courier New, monospace" font-size="22" font-weight="bold" fill="#39ff14" letter-spacing="4">std_logic_1164</text>
+  <rect x="30" y="80" width="50" height="50" fill="#0a2204" stroke="#0d300a" stroke-width="1"/>
+  <text x="55" y="101" text-anchor="middle" font-family="Courier New, monospace" font-size="9" fill="#39ff14" opacity="0.5">IEEE</text>
+  <text x="55" y="113" text-anchor="middle" font-family="Courier New, monospace" font-size="9" fill="#39ff14" opacity="0.5">1164</text>
+  <rect x="80" y="80" width="50" height="50" fill="#0a2204" stroke="#0d300a" stroke-width="1"/>
+  <text x="105" y="112" text-anchor="middle" font-family="Courier New, monospace" font-size="20" font-weight="bold" fill="#39ff14">U</text>
+  <rect x="130" y="80" width="50" height="50" fill="#0a2204" stroke="#0d300a" stroke-width="1"/>
+  <text x="155" y="112" text-anchor="middle" font-family="Courier New, monospace" font-size="20" font-weight="bold" fill="#39ff14">X</text>
+  <rect x="180" y="80" width="50" height="50" fill="#0a2204" stroke="#0d300a" stroke-width="1"/>
+  <text x="205" y="112" text-anchor="middle" font-family="Courier New, monospace" font-size="20" font-weight="bold" fill="#39ff14">0</text>
+  <rect x="230" y="80" width="50" height="50" fill="#0a2204" stroke="#0d300a" stroke-width="1"/>
+  <text x="255" y="112" text-anchor="middle" font-family="Courier New, monospace" font-size="20" font-weight="bold" fill="#39ff14">1</text>
+  <rect x="280" y="80" width="50" height="50" fill="#0a2204" stroke="#0d300a" stroke-width="1"/>
+  <text x="305" y="112" text-anchor="middle" font-family="Courier New, monospace" font-size="20" font-weight="bold" fill="#39ff14">Z</text>
+  <rect x="330" y="80" width="50" height="50" fill="#0a2204" stroke="#0d300a" stroke-width="1"/>
+  <text x="355" y="112" text-anchor="middle" font-family="Courier New, monospace" font-size="20" font-weight="bold" fill="#39ff14">W</text>
+  <rect x="380" y="80" width="50" height="50" fill="#0a2204" stroke="#0d300a" stroke-width="1"/>
+  <text x="405" y="112" text-anchor="middle" font-family="Courier New, monospace" font-size="20" font-weight="bold" fill="#39ff14">L</text>
+  <rect x="430" y="80" width="50" height="50" fill="#0a2204" stroke="#0d300a" stroke-width="1"/>
+  <text x="455" y="112" text-anchor="middle" font-family="Courier New, monospace" font-size="20" font-weight="bold" fill="#39ff14">H</text>
+  <rect x="480" y="80" width="50" height="50" fill="#0a2204" stroke="#0d300a" stroke-width="1"/>
+  <text x="505" y="112" text-anchor="middle" font-family="Courier New, monospace" font-size="20" font-weight="bold" fill="#39ff14">-</text>
+  <rect x="30" y="130" width="50" height="50" fill="#0a2204" stroke="#0d300a" stroke-width="1"/>
+  <text x="55" y="162" text-anchor="middle" font-family="Courier New, monospace" font-size="20" font-weight="bold" fill="#39ff14">U</text>
+  <rect x="80" y="130" width="50" height="50" fill="#071202" stroke="#0d300a" stroke-width="1"/>
+  <rect x="130" y="130" width="50" height="50" fill="url(#mirror_green_phosphor)" stroke="#0d300a" stroke-width="1"/>
+  <rect x="180" y="130" width="50" height="50" fill="url(#mirror_green_phosphor)" stroke="#0d300a" stroke-width="1"/>
+  <rect x="230" y="130" width="50" height="50" fill="url(#mirror_green_phosphor)" stroke="#0d300a" stroke-width="1"/>
+  <rect x="280" y="130" width="50" height="50" fill="url(#mirror_green_phosphor)" stroke="#0d300a" stroke-width="1"/>
+  <rect x="330" y="130" width="50" height="50" fill="url(#mirror_green_phosphor)" stroke="#0d300a" stroke-width="1"/>
+  <rect x="380" y="130" width="50" height="50" fill="url(#mirror_green_phosphor)" stroke="#0d300a" stroke-width="1"/>
+  <rect x="430" y="130" width="50" height="50" fill="url(#mirror_green_phosphor)" stroke="#0d300a" stroke-width="1"/>
+  <rect x="480" y="130" width="50" height="50" fill="url(#mirror_green_phosphor)" stroke="#0d300a" stroke-width="1"/>
+  <rect x="30" y="180" width="50" height="50" fill="#0a2204" stroke="#0d300a" stroke-width="1"/>
+  <text x="55" y="212" text-anchor="middle" font-family="Courier New, monospace" font-size="20" font-weight="bold" fill="#39ff14">X</text>
+  <rect x="80" y="180" width="50" height="50" fill="#2a9412" stroke="#0d300a" stroke-width="1"/>
+  <rect x="130" y="180" width="50" height="50" fill="#071202" stroke="#0d300a" stroke-width="1"/>
+  <rect x="180" y="180" width="50" height="50" fill="url(#mirror_green_phosphor)" stroke="#0d300a" stroke-width="1"/>
+  <rect x="230" y="180" width="50" height="50" fill="url(#mirror_green_phosphor)" stroke="#0d300a" stroke-width="1"/>
+  <rect x="280" y="180" width="50" height="50" fill="url(#mirror_green_phosphor)" stroke="#0d300a" stroke-width="1"/>
+  <rect x="330" y="180" width="50" height="50" fill="url(#mirror_green_phosphor)" stroke="#0d300a" stroke-width="1"/>
+  <rect x="380" y="180" width="50" height="50" fill="url(#mirror_green_phosphor)" stroke="#0d300a" stroke-width="1"/>
+  <rect x="430" y="180" width="50" height="50" fill="url(#mirror_green_phosphor)" stroke="#0d300a" stroke-width="1"/>
+  <rect x="480" y="180" width="50" height="50" fill="url(#mirror_green_phosphor)" stroke="#0d300a" stroke-width="1"/>
+  <rect x="30" y="230" width="50" height="50" fill="#0a2204" stroke="#0d300a" stroke-width="1"/>
+  <text x="55" y="262" text-anchor="middle" font-family="Courier New, monospace" font-size="20" font-weight="bold" fill="#39ff14">0</text>
+  <rect x="80" y="230" width="50" height="50" fill="#2a9412" stroke="#0d300a" stroke-width="1"/>
+  <rect x="130" y="230" width="50" height="50" fill="#195c0b" stroke="#0d300a" stroke-width="1"/>
+  <rect x="180" y="230" width="50" height="50" fill="#071202" stroke="#0d300a" stroke-width="1"/>
+  <rect x="230" y="230" width="50" height="50" fill="url(#mirror_green_phosphor)" stroke="#0d300a" stroke-width="1"/>
+  <rect x="280" y="230" width="50" height="50" fill="url(#mirror_green_phosphor)" stroke="#0d300a" stroke-width="1"/>
+  <rect x="330" y="230" width="50" height="50" fill="url(#mirror_green_phosphor)" stroke="#0d300a" stroke-width="1"/>
+  <rect x="380" y="230" width="50" height="50" fill="url(#mirror_green_phosphor)" stroke="#0d300a" stroke-width="1"/>
+  <rect x="430" y="230" width="50" height="50" fill="url(#mirror_green_phosphor)" stroke="#0d300a" stroke-width="1"/>
+  <rect x="480" y="230" width="50" height="50" fill="url(#mirror_green_phosphor)" stroke="#0d300a" stroke-width="1"/>
+  <rect x="30" y="280" width="50" height="50" fill="#0a2204" stroke="#0d300a" stroke-width="1"/>
+  <text x="55" y="312" text-anchor="middle" font-family="Courier New, monospace" font-size="20" font-weight="bold" fill="#39ff14">1</text>
+  <rect x="80" y="280" width="50" height="50" fill="#2a9412" stroke="#0d300a" stroke-width="1"/>
+  <rect x="130" y="280" width="50" height="50" fill="#195c0b" stroke="#0d300a" stroke-width="1"/>
+  <rect x="180" y="280" width="50" height="50" fill="#0f3a07" stroke="#0d300a" stroke-width="1"/>
+  <rect x="230" y="280" width="50" height="50" fill="#071202" stroke="#0d300a" stroke-width="1"/>
+  <rect x="280" y="280" width="50" height="50" fill="url(#mirror_green_phosphor)" stroke="#0d300a" stroke-width="1"/>
+  <rect x="330" y="280" width="50" height="50" fill="url(#mirror_green_phosphor)" stroke="#0d300a" stroke-width="1"/>
+  <rect x="380" y="280" width="50" height="50" fill="url(#mirror_green_phosphor)" stroke="#0d300a" stroke-width="1"/>
+  <rect x="430" y="280" width="50" height="50" fill="url(#mirror_green_phosphor)" stroke="#0d300a" stroke-width="1"/>
+  <rect x="480" y="280" width="50" height="50" fill="url(#mirror_green_phosphor)" stroke="#0d300a" stroke-width="1"/>
+  <rect x="30" y="330" width="50" height="50" fill="#0a2204" stroke="#0d300a" stroke-width="1"/>
+  <text x="55" y="362" text-anchor="middle" font-family="Courier New, monospace" font-size="20" font-weight="bold" fill="#39ff14">Z</text>
+  <rect x="80" y="330" width="50" height="50" fill="#2a9412" stroke="#0d300a" stroke-width="1"/>
+  <rect x="130" y="330" width="50" height="50" fill="#195c0b" stroke="#0d300a" stroke-width="1"/>
+  <rect x="180" y="330" width="50" height="50" fill="#0c2e05" stroke="#0d300a" stroke-width="1"/>
+  <rect x="230" y="330" width="50" height="50" fill="#0c2e05" stroke="#0d300a" stroke-width="1"/>
+  <rect x="280" y="330" width="50" height="50" fill="#071202" stroke="#0d300a" stroke-width="1"/>
+  <rect x="330" y="330" width="50" height="50" fill="url(#mirror_green_phosphor)" stroke="#0d300a" stroke-width="1"/>
+  <rect x="380" y="330" width="50" height="50" fill="url(#mirror_green_phosphor)" stroke="#0d300a" stroke-width="1"/>
+  <rect x="430" y="330" width="50" height="50" fill="url(#mirror_green_phosphor)" stroke="#0d300a" stroke-width="1"/>
+  <rect x="480" y="330" width="50" height="50" fill="url(#mirror_green_phosphor)" stroke="#0d300a" stroke-width="1"/>
+  <rect x="30" y="380" width="50" height="50" fill="#0a2204" stroke="#0d300a" stroke-width="1"/>
+  <text x="55" y="412" text-anchor="middle" font-family="Courier New, monospace" font-size="20" font-weight="bold" fill="#39ff14">W</text>
+  <rect x="80" y="380" width="50" height="50" fill="#2a9412" stroke="#0d300a" stroke-width="1"/>
+  <rect x="130" y="380" width="50" height="50" fill="#195c0b" stroke="#0d300a" stroke-width="1"/>
+  <rect x="180" y="380" width="50" height="50" fill="#195c0b" stroke="#0d300a" stroke-width="1"/>
+  <rect x="230" y="380" width="50" height="50" fill="#195c0b" stroke="#0d300a" stroke-width="1"/>
+  <rect x="280" y="380" width="50" height="50" fill="#112608" stroke="#0d300a" stroke-width="1"/>
+  <rect x="330" y="380" width="50" height="50" fill="#071202" stroke="#0d300a" stroke-width="1"/>
+  <rect x="380" y="380" width="50" height="50" fill="url(#mirror_green_phosphor)" stroke="#0d300a" stroke-width="1"/>
+  <rect x="430" y="380" width="50" height="50" fill="url(#mirror_green_phosphor)" stroke="#0d300a" stroke-width="1"/>
+  <rect x="480" y="380" width="50" height="50" fill="url(#mirror_green_phosphor)" stroke="#0d300a" stroke-width="1"/>
+  <rect x="30" y="430" width="50" height="50" fill="#0a2204" stroke="#0d300a" stroke-width="1"/>
+  <text x="55" y="462" text-anchor="middle" font-family="Courier New, monospace" font-size="20" font-weight="bold" fill="#39ff14">L</text>
+  <rect x="80" y="430" width="50" height="50" fill="#2a9412" stroke="#0d300a" stroke-width="1"/>
+  <rect x="130" y="430" width="50" height="50" fill="#195c0b" stroke="#0d300a" stroke-width="1"/>
+  <rect x="180" y="430" width="50" height="50" fill="#195c0b" stroke="#0d300a" stroke-width="1"/>
+  <rect x="230" y="430" width="50" height="50" fill="#0f3a07" stroke="#0d300a" stroke-width="1"/>
+  <rect x="280" y="430" width="50" height="50" fill="#0c2e05" stroke="#0d300a" stroke-width="1"/>
+  <rect x="330" y="430" width="50" height="50" fill="#112608" stroke="#0d300a" stroke-width="1"/>
+  <rect x="380" y="430" width="50" height="50" fill="#071202" stroke="#0d300a" stroke-width="1"/>
+  <rect x="430" y="430" width="50" height="50" fill="url(#mirror_green_phosphor)" stroke="#0d300a" stroke-width="1"/>
+  <rect x="480" y="430" width="50" height="50" fill="url(#mirror_green_phosphor)" stroke="#0d300a" stroke-width="1"/>
+  <rect x="30" y="480" width="50" height="50" fill="#0a2204" stroke="#0d300a" stroke-width="1"/>
+  <text x="55" y="512" text-anchor="middle" font-family="Courier New, monospace" font-size="20" font-weight="bold" fill="#39ff14">H</text>
+  <rect x="80" y="480" width="50" height="50" fill="#2a9412" stroke="#0d300a" stroke-width="1"/>
+  <rect x="130" y="480" width="50" height="50" fill="#195c0b" stroke="#0d300a" stroke-width="1"/>
+  <rect x="180" y="480" width="50" height="50" fill="#0f3a07" stroke="#0d300a" stroke-width="1"/>
+  <rect x="230" y="480" width="50" height="50" fill="#195c0b" stroke="#0d300a" stroke-width="1"/>
+  <rect x="280" y="480" width="50" height="50" fill="#0c2e05" stroke="#0d300a" stroke-width="1"/>
+  <rect x="330" y="480" width="50" height="50" fill="#112608" stroke="#0d300a" stroke-width="1"/>
+  <rect x="380" y="480" width="50" height="50" fill="#0f3a07" stroke="#0d300a" stroke-width="1"/>
+  <rect x="430" y="480" width="50" height="50" fill="#071202" stroke="#0d300a" stroke-width="1"/>
+  <rect x="480" y="480" width="50" height="50" fill="url(#mirror_green_phosphor)" stroke="#0d300a" stroke-width="1"/>
+  <rect x="30" y="530" width="50" height="50" fill="#0a2204" stroke="#0d300a" stroke-width="1"/>
+  <text x="55" y="562" text-anchor="middle" font-family="Courier New, monospace" font-size="20" font-weight="bold" fill="#39ff14">-</text>
+  <rect x="80" y="530" width="50" height="50" fill="#2a9412" stroke="#0d300a" stroke-width="1"/>
+  <rect x="130" y="530" width="50" height="50" fill="#195c0b" stroke="#0d300a" stroke-width="1"/>
+  <rect x="180" y="530" width="50" height="50" fill="#224e0e" stroke="#0d300a" stroke-width="1"/>
+  <rect x="230" y="530" width="50" height="50" fill="#224e0e" stroke="#0d300a" stroke-width="1"/>
+  <rect x="280" y="530" width="50" height="50" fill="#224e0e" stroke="#0d300a" stroke-width="1"/>
+  <rect x="330" y="530" width="50" height="50" fill="#224e0e" stroke="#0d300a" stroke-width="1"/>
+  <rect x="380" y="530" width="50" height="50" fill="#224e0e" stroke="#0d300a" stroke-width="1"/>
+  <rect x="430" y="530" width="50" height="50" fill="#224e0e" stroke="#0d300a" stroke-width="1"/>
+  <rect x="480" y="530" width="50" height="50" fill="#071202" stroke="#0d300a" stroke-width="1"/>
+  <text x="280" y="606" text-anchor="middle" font-family="Courier New, monospace" font-size="10" fill="#39ff14" opacity="0.65">std_logic © 1993 IEEE P1076 Authors and Contributors · Apache 2.0</text>
+  <text x="280" y="624" text-anchor="middle" font-family="Courier New, monospace" font-size="10" fill="#39ff14" opacity="0.65">glyph © 2026 diffo-dev · CC BY-NC-ND 4.0</text>
+</svg>

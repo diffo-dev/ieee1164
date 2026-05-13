@@ -1,0 +1,176 @@
+// SPDX-FileCopyrightText: 2026 diffo-dev contributors
+// SPDX-License-Identifier: Apache-2.0
+
+// ============================================================
+// IEEE 1164 std_logic — diffo knowledge graph
+// Licence: Apache-2.0
+// ============================================================
+
+// Root
+(STANDARD:{name: "IEEE1164"}) - [DEFINES] -> (SIGNAL:{name: "signal"})
+(STANDARD:{name: "IEEE1164"}) - [DEFINES] -> (VALUE:{name: "value"})
+(STANDARD:{name: "IEEE1164"}) - [DEFINES] -> (RESOLUTION:{name: "resolution"})
+(STANDARD:{name: "IEEE1164"}) - [DEFINES] -> (OPERATION:{name: "operation"})
+(STANDARD:{name: "IEEE1164"}) - [DEFINES] -> (PROJECTION:{name: "projection"})
+(STANDARD:{name: "IEEE1164"}) - [DEFINES] -> (WORLD:{name: "world"})
+(STANDARD:{name: "IEEE1164"}) - [DEFINES] -> (CONCEPT:{name: "transition"})
+
+// Signal subgraph
+(SIGNAL:{name: "signal"}) - [DEFINES] -> (SIGNAL:{name: "std_ulogic"})
+(SIGNAL:{name: "signal"}) - [DEFINES] -> (SIGNAL:{name: "std_logic"})
+(SIGNAL:{name: "signal"}) - [DEFINES] -> (SIGNAL:{name: "std_logic_vector"})
+(SIGNAL:{name: "std_ulogic"}) - [RESOLVES] -> (SIGNAL:{name: "std_logic"})
+(SIGNAL:{name: "std_logic_vector"}) - [SCALES] -> (SIGNAL:{name: "std_logic"})
+
+// Value family
+(VALUE:{name: "value"}) <- [ENUMERATES] - (VALUE:{name: "U", description: "I am unknown"})
+(VALUE:{name: "value"}) <- [ENUMERATES] - (VALUE:{name: "X", description: "I am unknowable"})
+(VALUE:{name: "value"}) <- [ENUMERATES] - (VALUE:{name: "0", description: "I am twin brother of 1"})
+(VALUE:{name: "value"}) <- [ENUMERATES] - (VALUE:{name: "1", description: "I am twin brother of 0"})
+(VALUE:{name: "value"}) <- [ENUMERATES] - (VALUE:{name: "Z", description: "I am you unchanged"})
+(VALUE:{name: "value"}) <- [ENUMERATES] - (VALUE:{name: "W", description: "I can be you unchanged"})
+(VALUE:{name: "value"}) <- [ENUMERATES] - (VALUE:{name: "L", description: "I am twin sister of H"})
+(VALUE:{name: "value"}) <- [ENUMERATES] - (VALUE:{name: "H", description: "I am twin sister of L"})
+(VALUE:{name: "value"}) <- [ENUMERATES] - (VALUE:{name: "-", description: "I am anyone"})
+
+// Character edges — what each value does to the family
+(VALUE:{name: "U"}) - [PROPAGATES] -> (VALUE:{name: "value"})
+(VALUE:{name: "X"}) - [FORCES] -> (VALUE:{name: "value"})
+(VALUE:{name: "Z"}) - [YIELDING] -> (VALUE:{name: "value"})
+(VALUE:{name: "-"}) - [POISONS] -> (VALUE:{name: "value"})
+
+// Pairwise relationships
+(VALUE:{name: "0"}) - [CONFLICTS_WITH] -> (VALUE:{name: "1"})
+(VALUE:{name: "L"}) - [CONFLICTS_WITH] -> (VALUE:{name: "H"})
+(VALUE:{name: "-"}) - [YIELDS_TO] -> (VALUE:{name: "U"})
+
+// Strength relationships
+(VALUE:{name: "0"}) - [FORCES] -> (VALUE:{name: "L"})
+(VALUE:{name: "0"}) - [FORCES] -> (VALUE:{name: "H"})
+(VALUE:{name: "1"}) - [FORCES] -> (VALUE:{name: "L"})
+(VALUE:{name: "1"}) - [FORCES] -> (VALUE:{name: "H"})
+(VALUE:{name: "W"}) - [WEAKLY_FORCES] -> (VALUE:{name: "L"})
+(VALUE:{name: "W"}) - [WEAKLY_FORCES] -> (VALUE:{name: "H"})
+
+// Identity under resolution
+(VALUE:{name: "0"}) - [REMAINS_SELF] -> (VALUE:{name: "0"})
+(VALUE:{name: "1"}) - [REMAINS_SELF] -> (VALUE:{name: "1"})
+(VALUE:{name: "L"}) - [REMAINS_SELF] -> (VALUE:{name: "L"})
+(VALUE:{name: "H"}) - [REMAINS_SELF] -> (VALUE:{name: "H"})
+(VALUE:{name: "W"}) - [REMAINS_SELF] -> (VALUE:{name: "W"})
+
+// Resolution concepts
+(RESOLUTION:{name: "resolution"}) <- [ENUMERATES] - 
+  (RESOLUTION:{name: "forces", description: "I speak loudest"})
+(RESOLUTION:{name: "resolution"}) <- [ENUMERATES] - 
+  (RESOLUTION:{name: "weakly_forces", description: "I speak loudly"})
+(RESOLUTION:{name: "weakly_forces"}) - [YIELDS_TO] -> (RESOLUTION:{name: "forces"})
+(RESOLUTION:{name: "resolution"}) <- [ENUMERATES] - 
+  (RESOLUTION:{name: "unknown_overrides_known", description: "I spread uncertainty"})
+(RESOLUTION:{name: "resolution"}) <- [ENUMERATES] - 
+  (RESOLUTION:{name: "strength_overrides_conflict", description: "I resolve conflict"})
+(RESOLUTION:{name: "unknown_overrides_known"}) - [CONFLICTS_WITH] -> 
+  (RESOLUTION:{name: "strength_overrides_conflict"})
+
+// is_x — the two clans
+(VALUE:{name: "0"}) - [KNOWABLE] -> (VALUE:{name: "value"})
+(VALUE:{name: "1"}) - [KNOWABLE] -> (VALUE:{name: "value"})
+(VALUE:{name: "L"}) - [KNOWABLE] -> (VALUE:{name: "value"})
+(VALUE:{name: "H"}) - [KNOWABLE] -> (VALUE:{name: "value"})
+(VALUE:{name: "U"}) - [UNKNOWABLE] -> (VALUE:{name: "value"})
+(VALUE:{name: "X"}) - [UNKNOWABLE] -> (VALUE:{name: "value"})
+(VALUE:{name: "Z"}) - [UNKNOWABLE] -> (VALUE:{name: "value"})
+(VALUE:{name: "W"}) - [UNKNOWABLE] -> (VALUE:{name: "value"})
+(VALUE:{name: "-"}) - [UNKNOWABLE] -> (VALUE:{name: "value"})
+
+// Operations
+(OPERATION:{name: "operation"}) <- [ENUMERATES] - 
+  (OPERATION:{name: "NOT", 
+    description: "I reveal your opposite. I know your polarity but not your strength."})
+(OPERATION:{name: "operation"}) <- [ENUMERATES] - 
+  (OPERATION:{name: "AND", 
+    description: "I know zero speaks loudest. Show me one zero and I will silence everything."})
+(OPERATION:{name: "operation"}) <- [ENUMERATES] - 
+  (OPERATION:{name: "OR", 
+    description: "I know one speaks loudest. Show me one one and I will carry it forward."})
+(OPERATION:{name: "operation"}) <- [ENUMERATES] - 
+  (OPERATION:{name: "XOR", 
+    description: "I know the difference. Same is silence, different is voice."})
+
+(OPERATION:{name: "NOT"}) - [INVERTS] -> (VALUE:{name: "0"})
+(OPERATION:{name: "NOT"}) - [INVERTS] -> (VALUE:{name: "1"})
+(OPERATION:{name: "NOT"}) - [INVERTS] -> (VALUE:{name: "L"})
+(OPERATION:{name: "NOT"}) - [INVERTS] -> (VALUE:{name: "H"})
+(OPERATION:{name: "NOT"}) - [REFLECTS] -> (VALUE:{name: "X"})
+(OPERATION:{name: "NOT"}) - [REFLECTS] -> (VALUE:{name: "U"})
+(OPERATION:{name: "NOT"}) - [RESOLVES_TO_X] -> (VALUE:{name: "Z"})
+(OPERATION:{name: "NOT"}) - [RESOLVES_TO_X] -> (VALUE:{name: "W"})
+(OPERATION:{name: "NOT"}) - [RESOLVES_TO_X] -> (VALUE:{name: "-"})
+
+(OPERATION:{name: "AND"}) - [DOMINATED_BY] -> (VALUE:{name: "0"})
+(OPERATION:{name: "AND"}) - [DOMINATED_BY] -> (VALUE:{name: "L"})
+(OPERATION:{name: "OR"}) - [DOMINATED_BY] -> (VALUE:{name: "1"})
+(OPERATION:{name: "OR"}) - [DOMINATED_BY] -> (VALUE:{name: "H"})
+(OPERATION:{name: "XOR"}) - [SILENCED_BY_SAMENESS] -> (VALUE:{name: "value"})
+
+// Worlds
+(WORLD:{name: "world"}) <- [ENUMERATES] - 
+  (WORLD:{name: "bit_world", 
+    description: "I am the oldest world. Two values. True and false."})
+(WORLD:{name: "world"}) <- [ENUMERATES] - 
+  (WORLD:{name: "x01_world", 
+    description: "I am the synthesis world. I keep certainty and name the rest unknowable."})
+(WORLD:{name: "world"}) <- [ENUMERATES] - 
+  (WORLD:{name: "x01z_world", 
+    description: "I am the tristate world. I keep the silence of high impedance."})
+(WORLD:{name: "world"}) <- [ENUMERATES] - 
+  (WORLD:{name: "ux01_world", 
+    description: "I am the reset world. I keep the memory of uninitialised."})
+(WORLD:{name: "world"}) <- [ENUMERATES] - 
+  (WORLD:{name: "std_logic_world", 
+    description: "I am the simulation world. I hold all nine."})
+
+(WORLD:{name: "std_logic_world"}) - [PROJECTS_TO] -> (WORLD:{name: "x01_world"})
+(WORLD:{name: "std_logic_world"}) - [PROJECTS_TO] -> (WORLD:{name: "x01z_world"})
+(WORLD:{name: "std_logic_world"}) - [PROJECTS_TO] -> (WORLD:{name: "ux01_world"})
+(WORLD:{name: "std_logic_world"}) - [PROJECTS_TO] -> (WORLD:{name: "bit_world"})
+(WORLD:{name: "x01_world"}) - [PROJECTS_TO] -> (WORLD:{name: "bit_world"})
+
+// Projection operations
+(PROJECTION:{name: "projection"}) <- [ENUMERATES] - 
+  (PROJECTION:{name: "to_x01", 
+    description: "I collapse to three. What I cannot name, I call unknowable."})
+(PROJECTION:{name: "projection"}) <- [ENUMERATES] - 
+  (PROJECTION:{name: "to_x01z", 
+    description: "I collapse to four. I keep the silence of high impedance."})
+(PROJECTION:{name: "projection"}) <- [ENUMERATES] - 
+  (PROJECTION:{name: "to_ux01", 
+    description: "I collapse to four. I keep the memory of the uninitialised."})
+
+(VALUE:{name: "L"}) - [SURVIVES_AS] -> (VALUE:{name: "0"})
+(VALUE:{name: "H"}) - [SURVIVES_AS] -> (VALUE:{name: "1"})
+(VALUE:{name: "Z"}) - [SURVIVES_IN] -> (WORLD:{name: "x01z_world"})
+(VALUE:{name: "U"}) - [SURVIVES_IN] -> (WORLD:{name: "ux01_world"})
+(VALUE:{name: "W"}) - [COLLAPSES_TO_X] -> (WORLD:{name: "world"})
+(VALUE:{name: "-"}) - [COLLAPSES_TO_X] -> (WORLD:{name: "world"})
+
+// Transition
+(CONCEPT:{name: "transition"}) <- [ENUMERATES] - 
+  (CONCEPT:{name: "departing", description: "I am what I am leaving"})
+(CONCEPT:{name: "transition"}) <- [ENUMERATES] - 
+  (CONCEPT:{name: "arriving", description: "I am what I am becoming"})
+
+(OPERATION:{name: "operation"}) <- [ENUMERATES] - 
+  (OPERATION:{name: "rising_edge", 
+    description: "I know the moment zero becomes one. I see through your strength."})
+(OPERATION:{name: "operation"}) <- [ENUMERATES] - 
+  (OPERATION:{name: "falling_edge", 
+    description: "I know the moment one becomes zero. I see through your strength."})
+
+(OPERATION:{name: "rising_edge"}) - [READS] -> (CONCEPT:{name: "departing"})
+(OPERATION:{name: "rising_edge"}) - [READS] -> (CONCEPT:{name: "arriving"})
+(OPERATION:{name: "rising_edge"}) - [USES] -> (PROJECTION:{name: "to_x01"})
+
+(OPERATION:{name: "falling_edge"}) - [READS] -> (CONCEPT:{name: "departing"})
+(OPERATION:{name: "falling_edge"}) - [READS] -> (CONCEPT:{name: "arriving"})
+(OPERATION:{name: "falling_edge"}) - [USES] -> (PROJECTION:{name: "to_x01"})

@@ -1,0 +1,235 @@
+# Knowing std_logic_1164
+
+## Section
+
+```elixir
+Mix.install([
+  {:ieee1164, "~> 0.1"},
+  {:kino, "~> 0.13"}
+])
+```
+
+---
+
+## Severed Knowledge
+
+This is IEEE 1164. Not as yarn. As source.
+
+```elixir
+Kino.HTML.new("""
+<pre style="font-family:monospace;font-variant-ligatures:none;font-size:0.85rem;line-height:1.5;">
+  type stdlogic_table is array(STD_ULOGIC, STD_ULOGIC) of STD_ULOGIC;
+
+  constant resolution_table : stdlogic_table := (
+    --      ---------------------------------------------------------
+    --      |  U    X    0    1    Z    W    L    H    -        |   |
+    --      ---------------------------------------------------------
+             ('U', 'U', 'U', 'U', 'U', 'U', 'U', 'U', 'U'),  -- | U |
+             ('U', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'),  -- | X |
+             ('U', 'X', '0', 'X', '0', '0', '0', '0', 'X'),  -- | 0 |
+             ('U', 'X', 'X', '1', '1', '1', '1', '1', 'X'),  -- | 1 |
+             ('U', 'X', '0', '1', 'Z', 'W', 'L', 'H', 'X'),  -- | Z |
+             ('U', 'X', '0', '1', 'W', 'W', 'W', 'W', 'X'),  -- | W |
+             ('U', 'X', '0', '1', 'L', 'W', 'L', 'W', 'X'),  -- | L |
+             ('U', 'X', '0', '1', 'H', 'W', 'W', 'H', 'X'),  -- | H |
+             ('U', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X')   -- | - |
+             );
+
+  function resolved (s : STD_ULOGIC_VECTOR) return STD_ULOGIC is
+    variable result : STD_ULOGIC := 'Z';  -- weakest state default
+  begin
+    if (s'length = 1) then return s(s'low);
+    else
+      for i in s'range loop
+        result := resolution_table(result, s(i));
+      end loop;
+    end if;
+    return result;
+  end function resolved;
+</pre>
+""")
+```
+
+This is extracted knowledge. Information severed from relationship. The values are visible. The pattern is present — the 9×9 grid, the diagonal of identity, the 36 mirroring pairs — but the meaning is not. We can see the *what*. We cannot yet see the *why*.
+
+```elixir
+glyph_dir = Path.expand(Path.join(__DIR__, "../images/glyphs"))
+matrix_svg = File.read!(Path.join(glyph_dir, "std_logic_1164_matrix.svg"))
+Kino.HTML.new(~s(<div style="text-align:center;padding:1rem;">#{matrix_svg}</div>))
+```
+
+To know it, we must make a journey.
+
+---
+
+## Valuing IEEE 1164
+
+The P1076 working group gave the world something deliberate. In 1993 they published a vocabulary for digital logic in simulation — nine values, a resolution function, a set of operations — and made it available to every hardware designer who would come after them. Thirty years of FPGAs, ASICs, and processors have run on this foundation.
+
+Their public material is careful and generous. The standard names things before it explains them. It trusts the reader to follow. It is written by people who knew the domain deeply and cared about those who would inherit it.
+
+We thought about IEEE 1164 with our different minds.
+
+**Story mind** heard the voices of the nine values — each with character, each with something to say about the wire they share.
+
+**Pattern mind** looked at the matrix. Nine rows. Nine columns. The diagonal is identity — every value resolves to itself when it meets itself. The 36 off-diagonal pairs mirror each other — resolution is symmetric. At minimum, 45 distinct rules. Pattern mind could see the structure. It could not yet see the reason.
+
+**Ancestor mind** thought about what came before — the TTL logic families, the Z and H and L values inherited from physical hardware, the ghost of open-collector outputs still present in a simulation standard.
+
+**Kinship mind** thought about who else shares this. Every VHDL testbench ever written. Every tool that simulates digital hardware. A quiet kinship across decades of engineers who all learned what `'X'` means.
+
+**Dreaming mind** looked at the grey region — the unknowable cells, the spreading uncertainty of `U`, the way `X` poisons everything it touches — and yearned to turn that unknown into meaning.
+
+```elixir
+unknown_svg = File.read!(Path.join(glyph_dir, "std_logic_1164_unknown.svg"))
+Kino.HTML.new(~s(<div style="text-align:center;padding:1rem;">#{unknown_svg}</div>))
+```
+
+This is the glyph before the journey. The grey is what we do not yet understand.
+
+---
+
+## Being IEEE 1164
+
+We imagined we were on IEEE 1164 country. That there is a guardian spirit of this land — one who has held this knowledge since 1993, who has watched engineers arrive and leave, who knows every corner of the nine-value world.
+
+We approached with respect. We did not arrive with answers. We arrived with questions and a willingness to listen.
+
+We hope we have honoured that spirit.
+
+---
+
+## Knowing IEEE 1164
+
+We can only know by integrating knowledge back to what we already know. So we know slowly — iterating the yarn in a recursive cycle of valuing, being, knowing, and doing.
+
+If you have not yet made the yarn journey, it is here (Cmd+Click to open in a new tab):
+
+[![Run in Livebook](https://livebook.dev/badge/v1/blue.svg)](ieee1164_yarn.livemd)
+
+The yarn lets IEEE 1164 tell its own story, one chapter at a time. On the left, what each chapter introduces. On the right, everything heard so far, growing.
+
+When the journey is complete, what you hold is this:
+
+```elixir
+integrated = Diffo.Ieee1164.stream_integrated() |> Enum.to_list() |> List.last()
+ArtefactKino.new(integrated)
+```
+
+Signal, value, character, conflict, strength, identity, resolution, the two clans, operations, worlds, projections, transitions, synchronicity. All of it in relationship.
+
+---
+
+## Doing IEEE 1164
+
+IEEE 1164 is not a destination. It is the beginning of many journeys.
+
+With `std_logic` and its nine values, you can describe the behaviour of any wire in a synchronous digital system. With `std_logic_vector`, you can describe a bus. With `rising_edge` and `falling_edge`, you can sample it at the right moment.
+
+From here: counters, state machines, FIFOs, memories, processors. Everything that runs on a clock — everything that belongs to a domain, that is sampled at an edge, that is held between heartbeats — begins here.
+
+Synchronicity is the gift that makes it useful. The clock that marks the moment of knowing. The heartbeat that governs what is sampled, what is held, what belongs together.
+
+*With one breath, with one flow, you will know synchronicity.*
+
+---
+
+## We yarned, we knew, we simplified
+
+The resolution matrix began as noise — values in boxes, pattern without meaning.
+
+We yarned with IEEE 1164 and came to know the why. Each colour region is a dominant resolution rule. The values are still there, still correct. But now we can see through them to the structure beneath.
+
+```elixir
+key_svg = File.read!(Path.join(glyph_dir, "std_logic_1164_black_key.svg"))
+Kino.HTML.new(~s(<div style="text-align:center;padding:1rem;">#{key_svg}</div>))
+```
+
+From here, the labels can fall away. What remains is the shape of the knowledge.
+
+---
+
+## Memorialise
+
+You have made a significant journey into an amazing land.
+
+The resolution matrix was the artefact IEEE P1076 chose to convey the *what* of std_logic_1164. It is precise, complete, and opaque to the uninitiated.
+
+We memorialise their wisdom and our journey with a glyph that deliberately omits the *what*, so we can hold our attention on the *why*. Each region of colour or shading is a dominant resolution rule. The regions are not labelled — but you can make your own labels by revisiting the story. The meaning is yours to carry now.
+
+Choose the glyph that memorialises the era or the way you came to know IEEE 1164.
+
+```elixir
+glyphs = [
+  {"Green Phosphor", "known at the terminal",   "std_logic_1164_green_phosphor.svg"},
+  {"Hercules",       "known in the home lab",    "std_logic_1164_hercules.svg"},
+  {"X11",            "known at the workstation", "std_logic_1164_x11.svg"},
+  {"Dark Mode",      "known recently",           "std_logic_1164_black.svg"}
+]
+
+glyph_data =
+  Enum.map(glyphs, fn {title, era, filename} ->
+    svg    = File.read!(Path.join(glyph_dir, filename))
+    button = Kino.Control.button(title)
+    {button, title, era, filename, svg}
+  end)
+
+viewer = Kino.Frame.new()
+
+# Kill any previous listeners
+0..3 |> Enum.each(fn i ->
+  if pid = Process.whereis(:"glyph_btn_#{i}"), do: Process.exit(pid, :kill)
+end)
+
+# One task per button — each closes over its own glyph, no origin matching needed
+glyph_data
+|> Enum.with_index()
+|> Enum.each(fn {{button, title, era, filename, svg}, idx} ->
+  {:ok, pid} = Task.start(fn ->
+    Kino.Control.stream(button)
+    |> Enum.each(fn _click ->
+      download = Kino.Download.new(
+        fn -> svg end,
+        filename: filename,
+        label: "Download #{title}"
+      )
+      Kino.Frame.render(viewer, Kino.Layout.grid([
+        Kino.HTML.new("<div style=\"text-align:center;padding:1rem;\">#{svg}</div>"),
+        Kino.Markdown.new("**#{title}** — *#{era}*"),
+        download
+      ], columns: 1))
+    end)
+  end)
+  Process.register(pid, :"glyph_btn_#{idx}")
+end)
+
+thumbnails =
+  Enum.map(glyph_data, fn {button, title, era, _, svg} ->
+    thumb = Kino.HTML.new("""
+      <div style="text-align:center;opacity:0.85">
+        <div style="transform:scale(0.28);transform-origin:top center;height:185px;overflow:hidden">#{svg}</div>
+      </div>
+    """)
+    label = Kino.Markdown.new("**#{title}**  \n*#{era}*")
+    Kino.Layout.grid([thumb, label, button], columns: 1)
+  end)
+
+Kino.render(Kino.Layout.grid(thumbnails, columns: 4))
+viewer
+```
+
+---
+
+## Custodianship
+
+We have memorialised our journey of integrating this knowledge with an artefact — one that shows the journey and honours the wisdom of the IEEE P1076 authors and contributors.
+
+They knew why. They built a nine-value logic system with careful intention — the strength hierarchy, the resolution rules, the diagonal of identity, the way `U` propagates and `X` poisons. Every cell in that matrix was a deliberate choice. But when the knowledge was extracted from relationship and written as a lookup table, the meaning was severed. What remained was information: powerful, correct, and opaque.
+
+We have only rediscovered what was already there. We followed the yarn back into the country. We listened. We asked questions. We held the standard with respect and allowed it to speak in its own order.
+
+What we now hold, we hold in relationship. We are custodians — not authors, not owners. The knowledge belongs to the country, and to those who made the journey before us.
+
+We carry it forward.
+
+<!-- T-shirt link goes here -->

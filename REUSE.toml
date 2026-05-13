@@ -1,0 +1,61 @@
+version = 1
+
+# Elixir source and config
+[[annotations]]
+path = "lib/**"
+SPDX-FileCopyrightText = "2026 diffo-dev contributors"
+SPDX-License-Identifier = "Apache-2.0"
+
+[[annotations]]
+path = "test/**"
+SPDX-FileCopyrightText = "2026 diffo-dev contributors"
+SPDX-License-Identifier = "Apache-2.0"
+
+[[annotations]]
+path = "mix.exs"
+SPDX-FileCopyrightText = "2026 diffo-dev contributors"
+SPDX-License-Identifier = "Apache-2.0"
+
+[[annotations]]
+path = ".formatter.exs"
+SPDX-FileCopyrightText = "2026 diffo-dev contributors"
+SPDX-License-Identifier = "Apache-2.0"
+
+[[annotations]]
+path = "mix.lock"
+SPDX-FileCopyrightText = "2026 diffo-dev contributors"
+SPDX-License-Identifier = "Apache-2.0"
+
+# Knowledge graph
+[[annotations]]
+path = "priv/ieee1164.txt"
+SPDX-FileCopyrightText = "2026 diffo-dev contributors"
+SPDX-License-Identifier = "Apache-2.0"
+
+# Upstream VHDL source — Apache-2.0 as redistributed by IEEE VASG
+[[annotations]]
+path = "priv/diffo/ieee_vasg/**"
+SPDX-FileCopyrightText = "2019 IEEE P1076 WG Authors"
+SPDX-License-Identifier = "Apache-2.0"
+
+# Glyphs — CC BY-NC-ND 4.0
+[[annotations]]
+path = "images/**"
+SPDX-FileCopyrightText = "2026 diffo-dev"
+SPDX-License-Identifier = "CC-BY-NC-ND-4.0"
+
+# Documentation
+[[annotations]]
+path = "README.md"
+SPDX-FileCopyrightText = "2026 diffo-dev contributors"
+SPDX-License-Identifier = "Apache-2.0"
+
+[[annotations]]
+path = "NOTICE"
+SPDX-FileCopyrightText = "2026 diffo-dev contributors"
+SPDX-License-Identifier = "Apache-2.0"
+
+[[annotations]]
+path = "docs/**"
+SPDX-FileCopyrightText = "2026 diffo-dev contributors"
+SPDX-License-Identifier = "Apache-2.0"
