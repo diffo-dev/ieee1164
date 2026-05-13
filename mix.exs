@@ -9,9 +9,11 @@ defmodule Ieee1164.MixProject do
       app: :ieee1164,
       version: "0.1.0",
       elixir: "~> 1.18",
+      description: "Knowledge about IEEE 1164 — the nine-value logic standard at the heart of VHDL simulation.",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       docs: docs(),
+      package: package(),
       usage_rules: usage_rules()
     ]
   end
@@ -48,6 +50,19 @@ defmodule Ieee1164.MixProject do
       {:artefact, "~> 0.3"},
       {:ex_doc, "~> 0.34", only: :dev, runtime: false},
       {:igniter, "~> 0.6", only: [:dev, :test]}
+    ]
+  end
+
+  defp package do
+    [
+      name: "ieee1164",
+      licenses: ["Apache-2.0"],
+      links: %{
+        "GitHub" => "https://github.com/diffo-dev/ieee1164",
+        "HexDocs" => "https://hexdocs.pm/ieee1164"
+      },
+      files: ~w(lib priv/diffo/ieee1164 images docs
+                mix.exs README.md CHANGELOG.md NOTICE.md LICENSES)
     ]
   end
 
