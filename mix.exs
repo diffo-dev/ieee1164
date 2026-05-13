@@ -23,9 +23,8 @@ defmodule Ieee1164.MixProject do
 
   defp deps do
     [
-      {:artefact_kino, "~> 0.2"},
-      # {:artefact, "~> 0.2.1"}, # on https://github.com/diffo-dev/artefactory/issues/38
-      {:artefact, path: "../artefactory/artefact", override: true},
+      {:artefact_kino, "~> 0.3"},
+      {:artefact, "~> 0.3"},
       {:ex_doc, "~> 0.34", only: :dev, runtime: false},
       {:igniter, "~> 0.6", only: [:dev, :test]}
     ]

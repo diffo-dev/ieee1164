@@ -4,6 +4,7 @@
 
 ```elixir
 Mix.install([
+  #{:ieee1164, "~> 0.1"},
   {:ieee1164, path: "/Users/beanlanda/git/ieee1164", override: true},
   {:kino, "~> 0.13"}
 ])
@@ -109,8 +110,8 @@ if pid = Process.whereis(:yarn_listener), do: Process.exit(pid, :kill)
         Kino.Frame.render(frame, Kino.Layout.grid([
           Kino.Markdown.new("## #{title}\n\n#{prose}"),
           Kino.Layout.grid([
-            ArtefactKino.new(Enum.at(sections, idx)),
-            ArtefactKino.new(integrated_artefact)
+            ArtefactKino.new(Enum.at(sections, idx), description_lines: 2, panel_height_px: 600),
+            ArtefactKino.new(integrated_artefact, description_lines: 2, panel_height_px: 600)
           ], columns: 2)
         ], columns: 1))
         i + 1
@@ -142,3 +143,9 @@ Process.register(pid, :yarn_listener)
 
 Kino.Layout.grid([button, frame], columns: 1)
 ```
+
+When we combine synchronicity with IEEE1164 std_logic_vector we have wide pipelines of signals, pulsing with values, in amazing configurations, such as ALU's, GPU's and the like.
+
+The knowable values come to us willingly from IEEE1164 land to help us with the work of our domain while staying true to their character and in right relation with their land and each other.
+
+This is the story of IEEE1164.
