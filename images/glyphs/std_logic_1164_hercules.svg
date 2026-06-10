@@ -118,7 +118,7 @@
   <rect x="130" y="380" width="50" height="50" fill="#4d2600" stroke="#4d2200" stroke-width="1"/>
   <rect x="180" y="380" width="50" height="50" fill="#4d2600" stroke="#4d2200" stroke-width="1"/>
   <rect x="230" y="380" width="50" height="50" fill="#4d2600" stroke="#4d2200" stroke-width="1"/>
-  <rect x="280" y="380" width="50" height="50" fill="#3d1e00" stroke="#4d2200" stroke-width="1"/>
+  <rect x="280" y="380" width="50" height="50" fill="#2a1100" stroke="#4d2200" stroke-width="1"/>
   <rect x="330" y="380" width="50" height="50" fill="#1a0900" stroke="#4d2200" stroke-width="1"/>
   <rect x="380" y="380" width="50" height="50" fill="url(#mirror_hercules)" stroke="#4d2200" stroke-width="1"/>
   <rect x="430" y="380" width="50" height="50" fill="url(#mirror_hercules)" stroke="#4d2200" stroke-width="1"/>
@@ -128,9 +128,9 @@
   <rect x="80" y="430" width="50" height="50" fill="#a05800" stroke="#4d2200" stroke-width="1"/>
   <rect x="130" y="430" width="50" height="50" fill="#4d2600" stroke="#4d2200" stroke-width="1"/>
   <rect x="180" y="430" width="50" height="50" fill="#4d2600" stroke="#4d2200" stroke-width="1"/>
-  <rect x="230" y="430" width="50" height="50" fill="#331500" stroke="#4d2200" stroke-width="1"/>
+  <rect x="230" y="430" width="50" height="50" fill="#4d2600" stroke="#4d2200" stroke-width="1"/>
   <rect x="280" y="430" width="50" height="50" fill="#2a1100" stroke="#4d2200" stroke-width="1"/>
-  <rect x="330" y="430" width="50" height="50" fill="#3d1e00" stroke="#4d2200" stroke-width="1"/>
+  <rect x="330" y="430" width="50" height="50" fill="#4d2600" stroke="#4d2200" stroke-width="1"/>
   <rect x="380" y="430" width="50" height="50" fill="#1a0900" stroke="#4d2200" stroke-width="1"/>
   <rect x="430" y="430" width="50" height="50" fill="url(#mirror_hercules)" stroke="#4d2200" stroke-width="1"/>
   <rect x="480" y="430" width="50" height="50" fill="url(#mirror_hercules)" stroke="#4d2200" stroke-width="1"/>
@@ -138,24 +138,24 @@
   <text x="55" y="512" text-anchor="middle" font-family="Courier New, monospace" font-size="20" font-weight="bold" fill="#FFD070">H</text>
   <rect x="80" y="480" width="50" height="50" fill="#a05800" stroke="#4d2200" stroke-width="1"/>
   <rect x="130" y="480" width="50" height="50" fill="#4d2600" stroke="#4d2200" stroke-width="1"/>
-  <rect x="180" y="480" width="50" height="50" fill="#331500" stroke="#4d2200" stroke-width="1"/>
+  <rect x="180" y="480" width="50" height="50" fill="#4d2600" stroke="#4d2200" stroke-width="1"/>
   <rect x="230" y="480" width="50" height="50" fill="#4d2600" stroke="#4d2200" stroke-width="1"/>
   <rect x="280" y="480" width="50" height="50" fill="#2a1100" stroke="#4d2200" stroke-width="1"/>
-  <rect x="330" y="480" width="50" height="50" fill="#3d1e00" stroke="#4d2200" stroke-width="1"/>
-  <rect x="380" y="480" width="50" height="50" fill="#331500" stroke="#4d2200" stroke-width="1"/>
+  <rect x="330" y="480" width="50" height="50" fill="#4d2600" stroke="#4d2200" stroke-width="1"/>
+  <rect x="380" y="480" width="50" height="50" fill="#3d1e00" stroke="#4d2200" stroke-width="1"/>
   <rect x="430" y="480" width="50" height="50" fill="#1a0900" stroke="#4d2200" stroke-width="1"/>
   <rect x="480" y="480" width="50" height="50" fill="url(#mirror_hercules)" stroke="#4d2200" stroke-width="1"/>
   <rect x="30" y="530" width="50" height="50" fill="#3d1500" stroke="#4d2200" stroke-width="1"/>
   <text x="55" y="562" text-anchor="middle" font-family="Courier New, monospace" font-size="20" font-weight="bold" fill="#FFD070">-</text>
   <rect x="80" y="530" width="50" height="50" fill="#a05800" stroke="#4d2200" stroke-width="1"/>
-  <rect x="130" y="530" width="50" height="50" fill="#4d2600" stroke="#4d2200" stroke-width="1"/>
+  <rect x="130" y="530" width="50" height="50" fill="#6b3300" stroke="#4d2200" stroke-width="1"/>
   <rect x="180" y="530" width="50" height="50" fill="#6b3300" stroke="#4d2200" stroke-width="1"/>
   <rect x="230" y="530" width="50" height="50" fill="#6b3300" stroke="#4d2200" stroke-width="1"/>
   <rect x="280" y="530" width="50" height="50" fill="#6b3300" stroke="#4d2200" stroke-width="1"/>
   <rect x="330" y="530" width="50" height="50" fill="#6b3300" stroke="#4d2200" stroke-width="1"/>
   <rect x="380" y="530" width="50" height="50" fill="#6b3300" stroke="#4d2200" stroke-width="1"/>
   <rect x="430" y="530" width="50" height="50" fill="#6b3300" stroke="#4d2200" stroke-width="1"/>
-  <rect x="480" y="530" width="50" height="50" fill="#1a0900" stroke="#4d2200" stroke-width="1"/>
+  <rect x="480" y="530" width="50" height="50" fill="#6b3300" stroke="#4d2200" stroke-width="1"/>
   <text x="280" y="606" text-anchor="middle" font-family="Courier New, monospace" font-size="10" fill="#FFD070" opacity="0.65">std_logic © 1993 IEEE P1076 Authors and Contributors · Apache 2.0</text>
   <text x="280" y="624" text-anchor="middle" font-family="Courier New, monospace" font-size="10" fill="#FFD070" opacity="0.65">glyph © 2026 diffo-dev · CC BY-NC-ND 4.0</text>
 </svg>

@@ -85,3 +85,8 @@ SPDX-License-Identifier = "Apache-2.0"
 path = ".gitattributes"
 SPDX-FileCopyrightText = "2026 diffo-dev contributors"
 SPDX-License-Identifier = "Apache-2.0"
+
+[[annotations]]
+path = ".tool-versions"
+SPDX-FileCopyrightText = "2026 diffo-dev contributors"
+SPDX-License-Identifier = "Apache-2.0"

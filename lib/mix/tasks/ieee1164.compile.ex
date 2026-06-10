@@ -12,9 +12,13 @@ defmodule Mix.Tasks.Ieee1164.Compile do
 
   Also writes the fully combined `ieee1164.bin`.
 
-  Run after `mix ieee1164.gen_uuids` whenever the yarn changes:
+  Run `mix ieee1164.gen_uuids` only when you add **new nodes** to the yarn;
+  it preserves existing UUIDs. `mix ieee1164.compile` is reproducible —
+  artefact identity is derived deterministically from section titles, so
+  recompiling unchanged yarn yields byte-identical artefacts and only the
+  `.bin` files whose section actually changed show up in the diff:
 
-      mix ieee1164.gen_uuids
+      mix ieee1164.gen_uuids   # only after adding new nodes
       mix ieee1164.compile
 
   Commit the `.bin` files so livebooks and other consumers can load artefacts

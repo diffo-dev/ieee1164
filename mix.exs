@@ -9,7 +9,8 @@ defmodule Ieee1164.MixProject do
       app: :ieee1164,
       version: "0.1.1",
       elixir: "~> 1.18",
-      description: "Knowledge about IEEE 1164 — the nine-value logic standard at the heart of VHDL simulation.",
+      description:
+        "Knowledge about IEEE 1164 — the nine-value logic standard at the heart of VHDL simulation.",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       docs: docs(),
@@ -18,24 +19,25 @@ defmodule Ieee1164.MixProject do
     ]
   end
 
-        defp usage_rules do
-        # Example for those using claude.
-        [
-          file: "CLAUDE.md",
-          # rules to include directly in CLAUDE.md
-          usage_rules: ["usage_rules:all"],
-          skills: [
-            location: ".claude/skills",
-            # build skills that combine multiple usage rules
-            build: [
-              artefactory: [
-                description: "Use this skill working when working with Artefact or Artefactory (doing Artefacture)",
-                usage_rules: [:artefact]
-              ]
-            ]
+  defp usage_rules do
+    # Example for those using claude.
+    [
+      file: "CLAUDE.md",
+      # rules to include directly in CLAUDE.md
+      usage_rules: ["usage_rules:all"],
+      skills: [
+        location: ".claude/skills",
+        # build skills that combine multiple usage rules
+        build: [
+          artefactory: [
+            description:
+              "Use this skill working when working with Artefact or Artefactory (doing Artefacture)",
+            usage_rules: [:artefact]
           ]
         ]
-      end
+      ]
+    ]
+  end
 
   def application do
     [

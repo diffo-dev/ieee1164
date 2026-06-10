@@ -45,7 +45,7 @@ entries = [
    "Nine names are given. They hang beneath `value` — enumerated, present, but not yet speaking. U, X, 0, 1, Z, W, L, H, and —. Their existence is declared before their character is known.",
    2},
   {:chapter, "The values each have character",
-   "> *\"I am unknown.\"*\n> *\"I am unknowable.\"*\n> *\"I am twin brother of 1.\"*\n> *\"I am twin brother of 0.\"*\n> *\"I am you unchanged.\"*\n> *\"I can be you unchanged.\"*\n> *\"I am twin sister of H.\"*\n> *\"I am twin sister of L.\"*\n> *\"I am anyone.\"*",
+   "> *\"I am unknown.\"*\n> *\"I am unknowable.\"*\n> *\"I am twin brother of 1.\"*\n> *\"I am twin brother of 0.\"*\n> *\"I am you unchanged.\"*\n> *\"I can be you unchanged.\"*\n> *\"I am twin sister of H.\"*\n> *\"I am twin sister of L.\"*\n> *\"I am indifferent.\"*",
    3},
   {:chapter, "Some values are twinned: conflicting or yielding",
    "Not all values can share a wire peacefully. 1 and 0 conflict. H and L conflict. Some yield — `-` yields to `U`, `Z` yields to all. The wire is not a neutral place.",

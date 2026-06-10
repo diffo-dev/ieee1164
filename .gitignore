@@ -25,3 +25,6 @@ ieee1164-*.tar
 # Agent related compiled skills and guideance via usage_rules
 .claude
 CLAUDE.md
+
+# macOS Finder metadata, anywhere in the tree.
+.DS_Store
