@@ -300,7 +300,17 @@ defmodule Diffo.Ieee1164 do
       Stream.transform(rest, initial, fn {title, [{_key, text}]}, acc ->
         section = Parser.parse(text, title: title, description: text)
         next = Artefact.combine!(acc, section)
-        next = %{next | title: "IEEE1164 integrating: #{title}"}
+        integrating_title = "IEEE1164 integrating: #{title}"
+
+        # Stable identity for the combined artefact so ieee1164.bin (and the
+        # provenance that references each step's uuid) is reproducible.
+        next = %{
+          next
+          | title: integrating_title,
+            id: Artefact.UUID.from_name(integrating_title <> "#id"),
+            uuid: Artefact.UUID.from_name(integrating_title)
+        }
+
         {[next], next}
       end)
 
