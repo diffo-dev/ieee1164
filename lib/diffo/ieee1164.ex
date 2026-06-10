@@ -57,7 +57,7 @@ defmodule Diffo.Ieee1164 do
     (VALUE:{name: "value"}) <- [ENUMERATES] - (VALUE:{name: "W", description: "I can be you unchanged"})
     (VALUE:{name: "value"}) <- [ENUMERATES] - (VALUE:{name: "L", description: "I am twin sister of H"})
     (VALUE:{name: "value"}) <- [ENUMERATES] - (VALUE:{name: "H", description: "I am twin sister of L"})
-    (VALUE:{name: "value"}) <- [ENUMERATES] - (VALUE:{name: "-", description: "I am anyone"})
+    (VALUE:{name: "value"}) <- [ENUMERATES] - (VALUE:{name: "-", description: "I am indifferent"})
   |
 
   @pairwise ~S|
@@ -65,8 +65,6 @@ defmodule Diffo.Ieee1164 do
     (VALUE:{name: "1"}) - [CONFLICTS_WITH] -> (VALUE:{name: "0"})
     (VALUE:{name: "0"}) - [CONFLICTS_WITH] -> (VALUE:{name: "H"})
     (VALUE:{name: "1"}) - [CONFLICTS_WITH] -> (VALUE:{name: "L"})
-    (VALUE:{name: "-"}) - [YIELDS_TO] -> (VALUE:{name: "U"})
-    (VALUE:{name: "Z"}) - [YIELDS_TO] -> (VALUE:{name: "value"})
   |
 
   @strength ~S|
@@ -74,11 +72,14 @@ defmodule Diffo.Ieee1164 do
     (VALUE:{name: "0"}) - [FORCES] -> (VALUE:{name: "W"})
     (VALUE:{name: "1"}) - [FORCES] -> (VALUE:{name: "H"})
     (VALUE:{name: "1"}) - [FORCES] -> (VALUE:{name: "W"})
-    (VALUE:{name: "X"}) - [POISONS] -> (VALUE:{name: "value"})
     (VALUE:{name: "W"}) - [WEAKLY_FORCES] -> (VALUE:{name: "L"})
     (VALUE:{name: "W"}) - [WEAKLY_FORCES] -> (VALUE:{name: "H"})
     (VALUE:{name: "U"}) - [PROPAGATES] -> (VALUE:{name: "value"})
+    (VALUE:{name: "X"}) - [POISONS] -> (VALUE:{name: "value"})
+    (VALUE:{name: "X"}) - [YIELDS_TO] -> (VALUE:{name: "U"})
     (VALUE:{name: "-"}) - [POISONS] -> (VALUE:{name: "value"})
+    (VALUE:{name: "-"}) - [YIELDS_TO] -> (VALUE:{name: "U"})
+    (VALUE:{name: "Z"}) - [YIELDS_TO] -> (VALUE:{name: "value"})
   |
 
   @identity_under_resolution ~S|
@@ -87,6 +88,7 @@ defmodule Diffo.Ieee1164 do
     (VALUE:{name: "W"}) - [REMAINS_SELF] -> (VALUE:{name: "W"})
     (VALUE:{name: "L"}) - [REMAINS_SELF] -> (VALUE:{name: "L"})
     (VALUE:{name: "H"}) - [REMAINS_SELF] -> (VALUE:{name: "H"})
+    (VALUE:{name: "-"}) - [RESOLVES_AS] -> (VALUE:{name: "X"})
   |
 
   @resolutions ~S|
@@ -96,6 +98,7 @@ defmodule Diffo.Ieee1164 do
     (RESOLUTION:{name: "resolution"}) <- [ENUMERATES] - (RESOLUTION:{name: "unknown_overrides_known", description: "I spread uncertainty"})
     (RESOLUTION:{name: "resolution"}) <- [ENUMERATES] - (RESOLUTION:{name: "strength_overrides_conflict", description: "I resolve conflict"})
     (RESOLUTION:{name: "unknown_overrides_known"}) - [CONFLICTS_WITH] -> (RESOLUTION:{name: "strength_overrides_conflict"})
+    (RESOLUTION:{name: "resolution"}) - [DISREGARDS] -> (CONCEPT:{name: "order"})
     (SIGNAL:{name: "std_ulogic"}) - [RESOLVES_TO] -> (SIGNAL:{name: "std_logic"})
   |
 
@@ -204,8 +207,8 @@ defmodule Diffo.Ieee1164 do
       {"My signals live here", signals: @signals},
       {"My signal's children are values", values: @values},
       {"The values each have character", character: @character},
-      {"Some values are twinned: conflicting or yielding", pairwise: @pairwise},
-      {"Some values impose their strength", strength: @strength},
+      {"Some values are twinned and conflict", pairwise: @pairwise},
+      {"Some values impose their strength, others yield", strength: @strength},
       {"Some values remain true to self", identity_under_resolution: @identity_under_resolution},
       {"Sometimes uncles must resolve things", resolutions: @resolutions},
       {"There are actually two clans", is_x: @is_x},

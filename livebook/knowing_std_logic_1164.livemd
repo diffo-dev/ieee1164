@@ -153,6 +153,8 @@ The resolution matrix began as noise — values in boxes, pattern without meanin
 
 We yarned with IEEE 1164 and came to know the why. Each colour region is a dominant resolution rule. The values are still there, still correct. But now we can see through them to the structure beneath.
 
+**Pattern mind** claimed the diagonal is identity. Clean, mathematical — the same thing every other matrix had ever taught it. The visit unteaches it. It only *looked* like identity. Eight values remain themselves, each for its own reason; don't-care remains nothing at all. What seemed one clean law was nine small stories — and the last of them a refusal. Pattern mind had read the shape and missed the reason. When the reason came, it undid the shape.
+
 ```elixir
 key_svg = read_glyph.("std_logic_1164_black_key.svg")
 Kino.HTML.new(~s(<div style="text-align:center;padding:1rem;">#{key_svg}</div>))

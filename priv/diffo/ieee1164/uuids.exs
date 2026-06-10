@@ -21,6 +21,7 @@
   "falling_edge" => "019e1794-60c3-726a-856d-467807b2d95d",
   "forces" => "019e1794-60c3-7db3-a1e5-e2500764ce2d",
   "operation" => "019e1794-60c3-7303-808e-4868b80ad9b0",
+  "order" => "019eae6a-8edf-7a5e-94b0-1cd3a1c83878",
   "resolution" => "019e1794-60c3-7aa9-ab4b-e796316a6559",
   "rising_edge" => "019e1794-60c3-7df2-9af1-0f6f498b7a8b",
   "sample" => "019e1794-60c3-77cb-88e7-f36525a2730a",
