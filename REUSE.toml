@@ -3,33 +3,33 @@ version = 1
 # Elixir source and config
 [[annotations]]
 path = "lib/**"
-SPDX-FileCopyrightText = "2026 diffo-dev contributors"
+SPDX-FileCopyrightText = "2026 diffo-dev"
 SPDX-License-Identifier = "Apache-2.0"
 
 [[annotations]]
 path = "test/**"
-SPDX-FileCopyrightText = "2026 diffo-dev contributors"
+SPDX-FileCopyrightText = "2026 diffo-dev"
 SPDX-License-Identifier = "Apache-2.0"
 
 [[annotations]]
 path = "mix.exs"
-SPDX-FileCopyrightText = "2026 diffo-dev contributors"
+SPDX-FileCopyrightText = "2026 diffo-dev"
 SPDX-License-Identifier = "Apache-2.0"
 
 [[annotations]]
 path = ".formatter.exs"
-SPDX-FileCopyrightText = "2026 diffo-dev contributors"
+SPDX-FileCopyrightText = "2026 diffo-dev"
 SPDX-License-Identifier = "Apache-2.0"
 
 [[annotations]]
 path = "mix.lock"
-SPDX-FileCopyrightText = "2026 diffo-dev contributors"
+SPDX-FileCopyrightText = "2026 diffo-dev"
 SPDX-License-Identifier = "Apache-2.0"
 
 # Knowledge graph source and compiled artefacts
 [[annotations]]
 path = "priv/diffo/ieee1164/**"
-SPDX-FileCopyrightText = "2026 diffo-dev contributors"
+SPDX-FileCopyrightText = "2026 diffo-dev"
 SPDX-License-Identifier = "Apache-2.0"
 
 # Upstream VHDL source — Apache-2.0 as redistributed by IEEE VASG
@@ -47,46 +47,46 @@ SPDX-License-Identifier = "CC-BY-NC-ND-4.0"
 # Documentation
 [[annotations]]
 path = "README.md"
-SPDX-FileCopyrightText = "2026 diffo-dev contributors"
+SPDX-FileCopyrightText = "2026 diffo-dev"
 SPDX-License-Identifier = "Apache-2.0"
 
 [[annotations]]
 path = "CHANGELOG.md"
-SPDX-FileCopyrightText = "2026 diffo-dev contributors"
+SPDX-FileCopyrightText = "2026 diffo-dev"
 SPDX-License-Identifier = "Apache-2.0"
 
 [[annotations]]
 path = "NOTICE.md"
-SPDX-FileCopyrightText = "2026 diffo-dev contributors"
+SPDX-FileCopyrightText = "2026 diffo-dev"
 SPDX-License-Identifier = "Apache-2.0"
 
 [[annotations]]
 path = "AGENTS.md"
-SPDX-FileCopyrightText = "2026 diffo-dev contributors"
+SPDX-FileCopyrightText = "2026 diffo-dev"
 SPDX-License-Identifier = "Apache-2.0"
 
 [[annotations]]
 path = "docs/**"
-SPDX-FileCopyrightText = "2026 diffo-dev contributors"
+SPDX-FileCopyrightText = "2026 diffo-dev"
 SPDX-License-Identifier = "Apache-2.0"
 
 [[annotations]]
 path = "livebook/**"
-SPDX-FileCopyrightText = "2026 diffo-dev contributors"
+SPDX-FileCopyrightText = "2026 diffo-dev"
 SPDX-License-Identifier = "Apache-2.0"
 
 # Tooling config — no creative content
 [[annotations]]
 path = ".gitignore"
-SPDX-FileCopyrightText = "2026 diffo-dev contributors"
+SPDX-FileCopyrightText = "2026 diffo-dev"
 SPDX-License-Identifier = "Apache-2.0"
 
 [[annotations]]
 path = ".gitattributes"
-SPDX-FileCopyrightText = "2026 diffo-dev contributors"
+SPDX-FileCopyrightText = "2026 diffo-dev"
 SPDX-License-Identifier = "Apache-2.0"
 
 [[annotations]]
 path = ".tool-versions"
-SPDX-FileCopyrightText = "2026 diffo-dev contributors"
+SPDX-FileCopyrightText = "2026 diffo-dev"
 SPDX-License-Identifier = "Apache-2.0"

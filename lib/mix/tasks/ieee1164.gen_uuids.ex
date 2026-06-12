@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: 2026 diffo-dev contributors
+# SPDX-FileCopyrightText: 2026 diffo-dev
 # SPDX-License-Identifier: Apache-2.0
 
 defmodule Mix.Tasks.Ieee1164.GenUuids do
@@ -24,7 +24,7 @@ defmodule Mix.Tasks.Ieee1164.GenUuids do
     Mix.Task.run("app.start")
 
     names =
-      Diffo.Ieee1164.yarn()
+      Ieee1164.yarn()
       |> Enum.flat_map(fn {_title, [{_key, text}]} ->
         Regex.scan(~r/name:\s*"([^"]+)"/, text)
         |> Enum.map(fn [_, name] -> name end)

@@ -74,12 +74,12 @@ The yarn in `lib/diffo/ieee1164.ex` is a series of module attributes, each holdi
 |
 ```
 
-Each section is parsed by `Diffo.Ieee1164.Parser` into a `%Artefact{}` with nodes and relationships. Sections accumulate — each new one is combined with all previous sections to form a growing integrated artefact.
+Each section is parsed by `Ieee1164.Parser` into a `%Artefact{}` with nodes and relationships. Sections accumulate — each new one is combined with all previous sections to form a growing integrated artefact.
 
 The two key stream functions are:
 
-- `Diffo.Ieee1164.stream/0` — returns each section as its own standalone artefact
-- `Diffo.Ieee1164.stream_integrated/0` — returns each section as a cumulative artefact, growing chapter by chapter
+- `Ieee1164.stream/0` — returns each section as its own standalone artefact
+- `Ieee1164.stream_integrated/0` — returns each section as a cumulative artefact, growing chapter by chapter
 
 Both return lazy `Stream`s. In a livebook you call `Enum.to_list/1` on them. The final element of `stream_integrated` is the complete IEEE 1164 knowledge graph.
 

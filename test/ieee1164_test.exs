@@ -1,11 +1,11 @@
-# SPDX-FileCopyrightText: 2026 diffo-dev contributors
+# SPDX-FileCopyrightText: 2026 diffo-dev
 # SPDX-License-Identifier: Apache-2.0
 
-defmodule Diffo.Ieee1164Test do
+defmodule Ieee1164Test do
   use ExUnit.Case
 
   test "yarn/0 returns all sections in order" do
-    keys = Diffo.Ieee1164.yarn() |> Enum.map(fn {_, [{key, _}]} -> key end)
+    keys = Ieee1164.yarn() |> Enum.map(fn {_, [{key, _}]} -> key end)
 
     assert keys == [
              :standard,
@@ -16,7 +16,7 @@ defmodule Diffo.Ieee1164Test do
              :strength,
              :identity_under_resolution,
              :resolutions,
-             :is_x,
+             :clans,
              :operations,
              :logic_operations,
              :worlds,
@@ -27,22 +27,22 @@ defmodule Diffo.Ieee1164Test do
   end
 
   test "each section parses to an artefact" do
-    Diffo.Ieee1164.yarn()
+    Ieee1164.yarn()
     |> Enum.each(fn {title, [{key, _}]} ->
-      artefact = apply(Diffo.Ieee1164, key, [])
+      artefact = apply(Ieee1164, key, [])
       assert Artefact.is_valid?(artefact), "#{title} (#{key}) artefact is not valid"
     end)
   end
 
   test "ieee1164/0 combines all sections into integrated knowledge" do
-    integrated = Diffo.Ieee1164.ieee1164()
+    integrated = Ieee1164.ieee1164()
     assert Artefact.is_valid?(integrated), "integrated ieee1164 artefact is not valid"
 
     # Every node from every section survives into the integrated artefact.
     section_node_names =
-      Diffo.Ieee1164.yarn()
+      Ieee1164.yarn()
       |> Enum.flat_map(fn {_, [{key, _}]} ->
-        artefact = apply(Diffo.Ieee1164, key, [])
+        artefact = apply(Ieee1164, key, [])
         Enum.map(artefact.graph.nodes, & &1.properties["name"])
       end)
       |> Enum.reject(&is_nil/1)
@@ -63,7 +63,7 @@ defmodule Diffo.Ieee1164Test do
   test "compile task writes valid binary artefacts to priv/diffo/ieee1164/" do
     out = Path.join([:code.priv_dir(:ieee1164) |> to_string(), "diffo", "ieee1164"])
 
-    section_bins = Diffo.Ieee1164.yarn() |> Enum.map(fn {_, [{key, _}]} -> "#{key}.bin" end)
+    section_bins = Ieee1164.yarn() |> Enum.map(fn {_, [{key, _}]} -> "#{key}.bin" end)
     expected = ["ieee1164.bin" | section_bins]
 
     for filename <- expected do

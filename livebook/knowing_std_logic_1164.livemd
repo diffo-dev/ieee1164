@@ -4,7 +4,7 @@
 
 ```elixir
 Mix.install([
-  {:ieee1164, "~> 0.1"},
+  {:ieee1164, "~> 0.2"},
   {:artefact_kino, "~> 0.3"},
   {:kino, "~> 0.13"},
   {:req, "~> 0.5"}
@@ -98,7 +98,7 @@ unknown_svg = read_glyph.("std_logic_1164_unknown.svg")
 Kino.HTML.new(~s(<div style="text-align:center;padding:1rem;">#{unknown_svg}</div>))
 ```
 
-This is the glyph before the journey. The grey is what we do not yet understand.
+This is the glyph before the journey. The grey is what we think we do not yet understand...
 
 ---
 
@@ -125,7 +125,7 @@ The yarn lets IEEE 1164 tell its own story, one chapter at a time. On the left, 
 When the journey is complete, what you hold is this:
 
 ```elixir
-integrated = Diffo.Ieee1164.stream_integrated() |> Enum.to_list() |> List.last()
+integrated = Ieee1164.stream_integrated() |> Enum.to_list() |> List.last()
 ArtefactKino.new(integrated)
 ```
 
@@ -239,7 +239,7 @@ viewer
 
 We have memorialised our journey of integrating this knowledge with an artefact — one that shows the journey and honours the wisdom of the IEEE P1076 authors and contributors.
 
-They knew why. They built a nine-value logic system with careful intention — the strength hierarchy, the resolution rules, the diagonal of identity, the way `U` propagates and `X` poisons. Every cell in that matrix was a deliberate choice. But when the knowledge was extracted from relationship and written as a lookup table, the meaning was severed. What remained was information: powerful, correct, and opaque.
+They knew why. They built a nine-value logic system with careful intention — the strength hierarchy, the resolution rules, the way each value resolves against itself — eight that hold and one that refuses, the way `U` propagates and `X` poisons. Every cell in that matrix was a deliberate choice. But when the knowledge was extracted from relationship and written as a lookup table, the meaning was severed. What remained was information: powerful, correct, and opaque.
 
 We have only rediscovered what was already there. We followed the yarn back into the country. We listened. We asked questions. We held the standard with respect and allowed it to speak in its own order.
 

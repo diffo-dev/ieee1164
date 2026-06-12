@@ -1,5 +1,5 @@
 <!--
-SPDX-FileCopyrightText: 2026 diffo-dev contributors
+SPDX-FileCopyrightText: 2026 diffo-dev
 SPDX-License-Identifier: Apache-2.0
 -->
 
@@ -75,10 +75,10 @@ binaries without re-parsing the yarn:
 
 ```elixir
 # A single section
-Diffo.Ieee1164.load(:values)
+Ieee1164.load(:values)
 
 # The fully integrated ieee1164 artefact
-Diffo.Ieee1164.load_ieee1164()
+Ieee1164.load_ieee1164()
 ```
 
 Both raise with a clear message if `mix ieee1164.compile` has not been run.
