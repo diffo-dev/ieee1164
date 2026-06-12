@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: 2026 diffo-dev contributors
+# SPDX-FileCopyrightText: 2026 diffo-dev
 # SPDX-License-Identifier: Apache-2.0
 
 defmodule Mix.Tasks.Ieee1164.Compile do
@@ -12,9 +12,13 @@ defmodule Mix.Tasks.Ieee1164.Compile do
 
   Also writes the fully combined `ieee1164.bin`.
 
-  Run after `mix ieee1164.gen_uuids` whenever the yarn changes:
+  Run `mix ieee1164.gen_uuids` only when you add **new nodes** to the yarn;
+  it preserves existing UUIDs. `mix ieee1164.compile` is reproducible —
+  artefact identity is derived deterministically from section titles, so
+  recompiling unchanged yarn yields byte-identical artefacts and only the
+  `.bin` files whose section actually changed show up in the diff:
 
-      mix ieee1164.gen_uuids
+      mix ieee1164.gen_uuids   # only after adding new nodes
       mix ieee1164.compile
 
   Commit the `.bin` files so livebooks and other consumers can load artefacts
@@ -28,16 +32,16 @@ defmodule Mix.Tasks.Ieee1164.Compile do
     Mix.Task.run("app.start")
     File.mkdir_p!(@out)
 
-    sections = Diffo.Ieee1164.yarn() |> Enum.map(fn {_, [{key, _}]} -> key end)
+    sections = Ieee1164.yarn() |> Enum.map(fn {_, [{key, _}]} -> key end)
 
     for key <- sections do
-      artefact = apply(Diffo.Ieee1164, key, [])
+      artefact = apply(Ieee1164, key, [])
       path = Path.join(@out, "#{key}.bin")
       File.write!(path, :erlang.term_to_binary(artefact))
       Mix.shell().info("  wrote #{path}")
     end
 
-    combined = Diffo.Ieee1164.ieee1164()
+    combined = Ieee1164.ieee1164()
     path = Path.join(@out, "ieee1164.bin")
     File.write!(path, :erlang.term_to_binary(combined))
     Mix.shell().info("  wrote #{path}")

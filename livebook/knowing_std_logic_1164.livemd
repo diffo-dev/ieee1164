@@ -4,7 +4,7 @@
 
 ```elixir
 Mix.install([
-  {:ieee1164, "~> 0.1"},
+  {:ieee1164, "~> 0.2"},
   {:artefact_kino, "~> 0.3"},
   {:kino, "~> 0.13"},
   {:req, "~> 0.5"}
@@ -98,7 +98,7 @@ unknown_svg = read_glyph.("std_logic_1164_unknown.svg")
 Kino.HTML.new(~s(<div style="text-align:center;padding:1rem;">#{unknown_svg}</div>))
 ```
 
-This is the glyph before the journey. The grey is what we do not yet understand.
+This is the glyph before the journey. The grey is what we think we do not yet understand...
 
 ---
 
@@ -125,7 +125,7 @@ The yarn lets IEEE 1164 tell its own story, one chapter at a time. On the left, 
 When the journey is complete, what you hold is this:
 
 ```elixir
-integrated = Diffo.Ieee1164.stream_integrated() |> Enum.to_list() |> List.last()
+integrated = Ieee1164.stream_integrated() |> Enum.to_list() |> List.last()
 ArtefactKino.new(integrated)
 ```
 
@@ -153,12 +153,33 @@ The resolution matrix began as noise — values in boxes, pattern without meanin
 
 We yarned with IEEE 1164 and came to know the why. Each colour region is a dominant resolution rule. The values are still there, still correct. But now we can see through them to the structure beneath.
 
+**Pattern mind** claimed the diagonal is identity. Clean, mathematical — the same thing every other matrix had ever taught it. The visit unteaches it. It only *looked* like identity. Eight values remain themselves, each for its own reason; don't-care remains nothing at all. What seemed one clean law was nine small stories — and the last of them a refusal. Pattern mind had read the shape and missed the reason. When the reason came, it undid the shape.
+
 ```elixir
 key_svg = read_glyph.("std_logic_1164_black_key.svg")
 Kino.HTML.new(~s(<div style="text-align:center;padding:1rem;">#{key_svg}</div>))
 ```
 
 From here, the labels can fall away. What remains is the shape of the knowledge.
+
+---
+
+## The worlds are written in the matrix
+
+There is one more thing the shape was hiding. The values run in **logical order** — `U X 0 1 Z W L H -`, indices `0..8` — not their ASCII codepoints. That choice was deliberate, and it pays off here: each projection world is a **contiguous block** of the matrix, nested along the diagonal.
+
+```elixir
+worlds_svg = read_glyph.("std_logic_1164_worlds.svg")
+Kino.HTML.new(~s(<div style="text-align:center;padding:1rem;">#{worlds_svg}</div>))
+```
+
+`X01` sits inside `X01Z` and `UX01`, both inside `UX01Z` — the five-value simulation core. And each of these is **closed**: resolve any two of its members and the answer is still one of its members. A world is a place you cannot leave by resolving.
+
+`bit` is the exception, and the exception is the whole point. `bit` is `{0, 1}` — the IEEE 1076 base type — and `0` against `1` resolves to `X`, which is not in `{0, 1}`. It escapes. That is *why* `bit` is an unresolved type, and why `X01` is the smallest world that closes: it is `bit` plus the `X` that conflict makes. You cannot draw `bit` as a closed region on the std_logic matrix, because it is not one.
+
+And the boxes show two things the line alone cannot. **`UX01Z` is the join** — exactly `UX01` and `X01Z` overlaid, the diamond from the yarn made visible. The only cells neither smaller world holds are the two corners where `U` meets `Z`, and the matrix fills them with `U`: the join completes itself. And **`U` is carved from `X`** — all along the `U` row and column, where `U` meets `X`, the cell resolves to `U`. The deeper unknown overrides the shallower; `U` is the very distinction `UX01` adds on top of `X01`.
+
+ASCII order would have sorted the values `- 0 1 H L U W X Z`, scattering every world across the grid. The logical order *is* the world hierarchy, written as a line.
 
 ---
 
@@ -237,7 +258,7 @@ viewer
 
 We have memorialised our journey of integrating this knowledge with an artefact — one that shows the journey and honours the wisdom of the IEEE P1076 authors and contributors.
 
-They knew why. They built a nine-value logic system with careful intention — the strength hierarchy, the resolution rules, the diagonal of identity, the way `U` propagates and `X` poisons. Every cell in that matrix was a deliberate choice. But when the knowledge was extracted from relationship and written as a lookup table, the meaning was severed. What remained was information: powerful, correct, and opaque.
+They knew why. They built a nine-value logic system with careful intention — the strength hierarchy, the resolution rules, the way each value resolves against itself — eight that hold and one that refuses, the way `U` propagates and `X` poisons. Every cell in that matrix was a deliberate choice. But when the knowledge was extracted from relationship and written as a lookup table, the meaning was severed. What remained was information: powerful, correct, and opaque.
 
 We have only rediscovered what was already there. We followed the yarn back into the country. We listened. We asked questions. We held the standard with respect and allowed it to speak in its own order.
 

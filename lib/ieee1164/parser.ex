@@ -1,7 +1,7 @@
-# SPDX-FileCopyrightText: 2026 diffo-dev contributors
+# SPDX-FileCopyrightText: 2026 diffo-dev
 # SPDX-License-Identifier: Apache-2.0
 
-defmodule Diffo.Ieee1164.Parser do
+defmodule Ieee1164.Parser do
   @moduledoc """
   Parses ieee1164 Cypher-style yarn strings into `%Artefact{}` structs.
 
@@ -37,12 +37,19 @@ defmodule Diffo.Ieee1164.Parser do
     nodes = registry_to_nodes(registry)
     relationships = build_relationships(statements, registry)
 
+    # Stable artefact identity — derive id/uuid deterministically from the
+    # section's title so recompiling unchanged yarn produces byte-identical
+    # output (no churn). Node uuids are already stable via priv/uuids.exs.
+    seed = title || description || ""
+
     Artefact.new!(
       title: title,
       description: description,
       base_label: nil,
       nodes: nodes,
-      relationships: relationships
+      relationships: relationships,
+      id: Artefact.UUID.from_name(seed <> "#id"),
+      uuid: Artefact.UUID.from_name(seed)
     )
   end
 

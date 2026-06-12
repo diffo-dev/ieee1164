@@ -4,7 +4,7 @@
 
 ```elixir
 Mix.install([
-  {:ieee1164, "~> 0.1"},
+  {:ieee1164, "~> 0.2"},
   {:artefact_kino, "~> 0.3"},
   {:kino, "~> 0.13"}
 ])
@@ -24,8 +24,8 @@ On the **right**: everything heard so far, growing.
 Press **Next chapter →** to advance. There is no hurry.
 
 ```elixir
-sections   = Diffo.Ieee1164.stream() |> Enum.to_list()
-integrated = Diffo.Ieee1164.stream_integrated() |> Enum.to_list()
+sections   = Ieee1164.stream() |> Enum.to_list()
+integrated = Ieee1164.stream_integrated() |> Enum.to_list()
 :ready
 ```
 
@@ -45,7 +45,7 @@ entries = [
    "Nine names are given. They hang beneath `value` — enumerated, present, but not yet speaking. U, X, 0, 1, Z, W, L, H, and —. Their existence is declared before their character is known.",
    2},
   {:chapter, "The values each have character",
-   "> *\"I am unknown.\"*\n> *\"I am unknowable.\"*\n> *\"I am twin brother of 1.\"*\n> *\"I am twin brother of 0.\"*\n> *\"I am you unchanged.\"*\n> *\"I can be you unchanged.\"*\n> *\"I am twin sister of H.\"*\n> *\"I am twin sister of L.\"*\n> *\"I am anyone.\"*",
+   "> *\"I am unknown.\"*\n> *\"I am unknowable.\"*\n> *\"I am twin brother of 1.\"*\n> *\"I am twin brother of 0.\"*\n> *\"I am you unchanged.\"*\n> *\"I can be you unchanged.\"*\n> *\"I am twin sister of H.\"*\n> *\"I am twin sister of L.\"*\n> *\"I am indifferent.\"*",
    3},
   {:chapter, "Some values are twinned: conflicting or yielding",
    "Not all values can share a wire peacefully. 1 and 0 conflict. H and L conflict. Some yield — `-` yields to `U`, `Z` yields to all. The wire is not a neutral place.",
@@ -69,13 +69,13 @@ entries = [
    "NOT inverts the knowable. NOT reflects the unknowable. NOT resolves `Z`, `W`, `-` to X. AND is dominated by `0` and `L`. OR is dominated by `1` and `H`. XOR is silenced by sameness.",
    10},
   {:chapter, "We know of other worlds",
-   "Not everyone needs all nine values. IEEE 1164 offers worlds — each a projection of the full nine into a simpler space. `std_logic_world` holds all nine. `x01_world` keeps certainty. `x01z_world` keeps high impedance. `ux01_world` keeps the uninitialised. `bit_world` keeps only two.",
+   "`bit_world` knows only `0` and `1`. It cannot imagine `X`, or `Z`, or the uninitialised — it has not chosen simplicity; it is simply simple. Add a little nuance and a wider world opens. `x01_world` admits `X`, the unknown. From there the path branches: `x01z_world` admits `Z`, high impedance; `ux01_world` admits `U`, the uninitialised; `ux01z_world` holds both. And `std_logic_world` holds all nine — the weak voices `L`, `H`, `W`, and the indifferent `-` besides. Each world can see the simpler ones within it; none can see the worlds beyond.",
    11},
   {:chapter, "And we can pass between them as they are one",
-   "`std_logic_world` projects to all others. `x01_world` projects to `bit_world`. `L` survives as `0`. `H` survives as `1`. `Z` survives only in `x01z_world`. `U` survives only in `ux01_world`. `W` and `-` collapse to X everywhere.\n\nThe worlds are not separate. They are views of the same truth.\n\nAnd here — the signal family comes fully into view. `std_logic` is the resolved world. `std_logic_vector` scales it across many wires. The family is complete.",
+   "Going inward is a simple mapping — the nine collapse onto fewer. `to_x01`, `to_x01z`, `to_ux01` do the folding: `L` survives as `0`, `H` as `1`; `W`, `Z`, `U` and `-` fall to `X`. Going outward is not so free: a richer world holds distinctions the simpler one never had, so nuance must be applied — a `0` that knew nothing of strength must be told whether it forces or merely leans. A value holds its full self only where a world admits it.\n\nThe worlds are not separate. They are views of the same truth.\n\nAnd here — the signal family comes fully into view. `std_logic` is the resolved world. `std_logic_vector` scales it across many wires. The family is complete.",
    12},
   {:chapter, "We live in the moment",
-   "`departing` is what you were. `arriving` is what you are becoming. `rising_edge` and `falling_edge` read both — they see through the strength of values to the moment of change. They use `to_x01` to know clearly, then speak only when the transition is real.",
+   "`rising_edge` knows the moment `0` becomes `1`. `falling_edge` knows the moment `1` becomes `0`. Each reads the value before and after the edge, seeing through strength with `to_x01`, and speaks only when the change is real. There is no history here — only the two values on either side of the moment.",
    13},
   {:pause, "The knowledge so far",
    "Fourteen chapters. The full vocabulary of IEEE 1164 — signals, values, character, conflict, strength, identity, resolution, the two clans, operations, worlds, projections, transitions. Everything except the gift that makes it useful.",
