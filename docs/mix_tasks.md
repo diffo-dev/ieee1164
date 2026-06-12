@@ -119,3 +119,28 @@ priv/diffo/ieee1164/
 ├── synchronicity.bin  ─╯
 └── ieee1164.bin       ← fully integrated artefact           (compile)
 ```
+
+---
+
+## `mix ieee1164.gen_pngs`
+
+A glyph utility, separate from the compiler pipeline. Rasterises every
+`images/glyphs/*.svg` to a PNG beside it — for sharing where SVG pastes as
+text rather than an image (Discord, WhatsApp). The SVGs stay the source of
+truth; the PNGs are generated and git-ignored.
+
+```sh
+mix ieee1164.gen_pngs
+#   std_logic_1164_black.png
+#   ...
+# 8 glyphs rendered to images/glyphs/ (zoom 2.0)
+```
+
+`--zoom` sets the output resolution — the SVGs are 560px wide, so the default
+of 2 renders at 1120px:
+
+```sh
+mix ieee1164.gen_pngs --zoom 3
+```
+
+Uses `resvg` (a dev-only dependency).

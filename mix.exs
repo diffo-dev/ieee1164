@@ -52,7 +52,8 @@ defmodule Ieee1164.MixProject do
       {:artefact_kino, "~> 0.3"},
       {:artefact, "~> 0.3"},
       {:ex_doc, "~> 0.34", only: :dev, runtime: false},
-      {:igniter, "~> 0.6", only: [:dev, :test]}
+      {:igniter, "~> 0.6", only: [:dev, :test]},
+      {:resvg, "~> 0.5.0", only: :dev, runtime: false}
     ]
   end
 
