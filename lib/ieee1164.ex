@@ -1,10 +1,10 @@
-# SPDX-FileCopyrightText: 2026 diffo-dev contributors
+# SPDX-FileCopyrightText: 2026 diffo-dev
 # SPDX-License-Identifier: Apache-2.0
 
-defmodule Diffo.Ieee1164 do
+defmodule Ieee1164 do
   @moduledoc """
   The ieee1164 knowledge graph, expressed as Cypher-style yarn and compiled
-  into Artefact form via `Diffo.Ieee1164.Parser`.
+  into Artefact form via `Ieee1164.Parser`.
 
   Each section of the yarn is both readable source and a callable function
   returning a self-contained `%Artefact{}`. The title of each artefact is
@@ -15,7 +15,7 @@ defmodule Diffo.Ieee1164 do
   """
 
   require Artefact
-  alias Diffo.Ieee1164.Parser
+  alias Ieee1164.Parser
 
   # ─── Yarn ───────────────────────────────────────────────────────────────
 
@@ -25,15 +25,17 @@ defmodule Diffo.Ieee1164 do
     (STANDARD:{name: "IEEE1164"}) - [DEFINES] -> (RESOLUTION:{name: "resolution"})
     (STANDARD:{name: "IEEE1164"}) - [DEFINES] -> (OPERATION:{name: "operation"})
     (STANDARD:{name: "IEEE1164"}) - [DEFINES] -> (WORLD:{name: "world"})
-    (STANDARD:{name: "IEEE1164"}) - [DEFINES] -> (CONCEPT:{name: "transition"})
   |
 
   @signals ~S|
     (SIGNAL:{name: "signal"}) - [DEFINES] -> (SIGNAL:{name: "std_ulogic"})
     (SIGNAL:{name: "signal"}) - [DEFINES] -> (SIGNAL:{name: "std_logic"})
+    (SIGNAL:{name: "signal"}) - [DEFINES] -> (SIGNAL:{name: "std_ulogic_vector"})
     (SIGNAL:{name: "signal"}) - [DEFINES] -> (SIGNAL:{name: "std_logic_vector"})
     (SIGNAL:{name: "std_ulogic"}) - [RESOLVES_TO] -> (SIGNAL:{name: "std_logic"})
+    (SIGNAL:{name: "std_ulogic_vector"}) - [RESOLVES_TO] -> (SIGNAL:{name: "std_logic_vector"})
     (SIGNAL:{name: "std_logic_vector"}) - [SCALES] -> (SIGNAL:{name: "std_logic"})
+    (SIGNAL:{name: "std_ulogic_vector"}) - [SCALES] -> (SIGNAL:{name: "std_ulogic"})
   |
 
   @values ~S|
@@ -102,19 +104,20 @@ defmodule Diffo.Ieee1164 do
     (SIGNAL:{name: "std_ulogic"}) - [RESOLVES_TO] -> (SIGNAL:{name: "std_logic"})
   |
 
-  @is_x ~S|
-    (VALUE:{name: "0"}) - [KNOWABLE] -> (VALUE:{name: "value"})
-    (VALUE:{name: "1"}) - [KNOWABLE] -> (VALUE:{name: "value"})
-    (VALUE:{name: "L"}) - [KNOWABLE] -> (VALUE:{name: "value"})
-    (VALUE:{name: "H"}) - [KNOWABLE] -> (VALUE:{name: "value"})
-    (VALUE:{name: "U"}) - [UNKNOWABLE] -> (VALUE:{name: "value"})
-    (VALUE:{name: "X"}) - [UNKNOWABLE] -> (VALUE:{name: "value"})
-    (VALUE:{name: "Z"}) - [UNKNOWABLE] -> (VALUE:{name: "value"})
-    (VALUE:{name: "W"}) - [UNKNOWABLE] -> (VALUE:{name: "value"})
-    (VALUE:{name: "-"}) - [UNKNOWABLE] -> (VALUE:{name: "value"})
+  @clans ~S|
+    (VALUE:{name: "0"}) - [OBSERVABLE] -> (CONCEPT:{name: "observable", description: "I am knowable."})
+    (VALUE:{name: "1"}) - [OBSERVABLE] -> (CONCEPT:{name: "observable"})
+    (VALUE:{name: "L"}) - [OBSERVABLE] -> (CONCEPT:{name: "observable"})
+    (VALUE:{name: "H"}) - [OBSERVABLE] -> (CONCEPT:{name: "observable"})
+    (VALUE:{name: "U"}) - [UNOBSERVABLE] -> (CONCEPT:{name: "unobservable", description: "I am unknowable. I can only be reasoned about."})
+    (VALUE:{name: "X"}) - [UNOBSERVABLE] -> (CONCEPT:{name: "unobservable"})
+    (VALUE:{name: "Z"}) - [UNOBSERVABLE] -> (CONCEPT:{name: "unobservable"})
+    (VALUE:{name: "W"}) - [UNOBSERVABLE] -> (CONCEPT:{name: "unobservable"})
+    (VALUE:{name: "-"}) - [UNOBSERVABLE] -> (CONCEPT:{name: "unobservable"})
   |
 
   @operations ~S|
+    (OPERATION:{name: "operation"}) <- [ENUMERATES] - (OPERATION:{name: "is_x", description: "I tell the certain from the unknowable."})
     (OPERATION:{name: "operation"}) <- [ENUMERATES] - (OPERATION:{name: "NOT", description: "I reveal your opposite. I know your polarity but not your strength."})
     (OPERATION:{name: "operation"}) <- [ENUMERATES] - (OPERATION:{name: "AND", description: "I know zero speaks loudest. Show me one zero and I will silence everything."})
     (OPERATION:{name: "operation"}) <- [ENUMERATES] - (OPERATION:{name: "OR", description: "I know one speaks loudest. Show me one one and I will carry it forward."})
@@ -143,54 +146,61 @@ defmodule Diffo.Ieee1164 do
     (WORLD:{name: "world"}) <- [ENUMERATES] - (WORLD:{name: "x01_world", description: "I am the synthesis world. I keep certainty and name the rest unknowable."})
     (WORLD:{name: "world"}) <- [ENUMERATES] - (WORLD:{name: "x01z_world", description: "I am the tristate world. I keep the silence of high impedance."})
     (WORLD:{name: "world"}) <- [ENUMERATES] - (WORLD:{name: "ux01_world", description: "I am the reset world. I keep the memory of uninitialised."})
+    (WORLD:{name: "world"}) <- [ENUMERATES] - (WORLD:{name: "ux01z_world", description: "I am the digital world. I keep the silence of high impedance and the memory of uninitialised, leaving the weak to simulation."})
     (WORLD:{name: "world"}) <- [ENUMERATES] - (WORLD:{name: "std_logic_world", description: "I am the simulation world. I hold all nine."})
+    (SIGNAL:{name: "std_logic"}) - [INHABITS] -> (WORLD:{name: "std_logic_world"})
+    (SIGNAL:{name: "std_ulogic"}) - [INHABITS] -> (WORLD:{name: "std_logic_world"})
   |
 
   @projections ~S|
     (OPERATION:{name: "to_x01"}) - [COLLAPSES_TO] -> (OPERATION:{name: "operation"})
     (OPERATION:{name: "to_x01z"}) - [COLLAPSES_TO] -> (OPERATION:{name: "operation"})
     (OPERATION:{name: "to_ux01"}) - [COLLAPSES_TO] -> (OPERATION:{name: "operation"})
-    (WORLD:{name: "std_logic_world"}) - [PROJECTS_TO] -> (WORLD:{name: "x01_world"})
-    (WORLD:{name: "std_logic_world"}) - [PROJECTS_TO] -> (WORLD:{name: "x01z_world"})
-    (WORLD:{name: "std_logic_world"}) - [PROJECTS_TO] -> (WORLD:{name: "ux01_world"})
-    (WORLD:{name: "std_logic_world"}) - [PROJECTS_TO] -> (WORLD:{name: "bit_world"})
-    (WORLD:{name: "x01_world"}) - [PROJECTS_TO] -> (WORLD:{name: "bit_world"})
+    (WORLD:{name: "std_logic_world"}) - [EXTENDS] -> (WORLD:{name: "ux01z_world"})
+    (WORLD:{name: "ux01z_world"}) - [EXTENDS] -> (WORLD:{name: "x01z_world"})
+    (WORLD:{name: "ux01z_world"}) - [EXTENDS] -> (WORLD:{name: "ux01_world"})
+    (WORLD:{name: "x01z_world"}) - [EXTENDS] -> (WORLD:{name: "x01_world"})
+    (WORLD:{name: "ux01_world"}) - [EXTENDS] -> (WORLD:{name: "x01_world"})
+    (WORLD:{name: "x01_world"}) - [EXTENDS] -> (WORLD:{name: "bit_world"})
+    (WORLD:{name: "bit_world"}) - [ADMITS] -> (VALUE:{name: "0"})
+    (WORLD:{name: "bit_world"}) - [ADMITS] -> (VALUE:{name: "1"})
+    (WORLD:{name: "x01_world"}) - [ADMITS] -> (VALUE:{name: "X"})
+    (WORLD:{name: "x01z_world"}) - [ADMITS] -> (VALUE:{name: "Z"})
+    (WORLD:{name: "ux01_world"}) - [ADMITS] -> (VALUE:{name: "U"})
+    (WORLD:{name: "std_logic_world"}) - [ADMITS] -> (VALUE:{name: "W"})
+    (WORLD:{name: "std_logic_world"}) - [ADMITS] -> (VALUE:{name: "L"})
+    (WORLD:{name: "std_logic_world"}) - [ADMITS] -> (VALUE:{name: "H"})
+    (WORLD:{name: "std_logic_world"}) - [ADMITS] -> (VALUE:{name: "-"})
     (VALUE:{name: "L"}) - [SURVIVES_AS] -> (VALUE:{name: "0"})
     (VALUE:{name: "H"}) - [SURVIVES_AS] -> (VALUE:{name: "1"})
-    (VALUE:{name: "Z"}) - [SURVIVES_IN] -> (WORLD:{name: "x01z_world"})
-    (VALUE:{name: "U"}) - [SURVIVES_IN] -> (WORLD:{name: "ux01_world"})
-    (VALUE:{name: "W"}) - [COLLAPSES_TO_X] -> (WORLD:{name: "world"})
-    (VALUE:{name: "-"}) - [COLLAPSES_TO_X] -> (WORLD:{name: "world"})
+    (VALUE:{name: "W"}) - [SURVIVES_AS] -> (VALUE:{name: "X"})
+    (VALUE:{name: "Z"}) - [SURVIVES_AS] -> (VALUE:{name: "X"})
+    (VALUE:{name: "U"}) - [SURVIVES_AS] -> (VALUE:{name: "X"})
+    (VALUE:{name: "-"}) - [SURVIVES_AS] -> (VALUE:{name: "X"})
   |
 
   @transitions ~S|
-    (CONCEPT:{name: "transition"}) <- [ENUMERATES] -
-    (CONCEPT:{name: "departing", description: "I am what I am leaving"})
-    (CONCEPT:{name: "transition"}) <- [ENUMERATES] -
-    (CONCEPT:{name: "arriving", description: "I am what I am becoming"})
     (OPERATION:{name: "operation"}) <- [ENUMERATES] -
     (OPERATION:{name: "rising_edge", description: "I know the moment zero becomes one. I see through your strength."})
     (OPERATION:{name: "operation"}) <- [ENUMERATES] -
     (OPERATION:{name: "falling_edge", description: "I know the moment one becomes zero. I see through your strength."})
-    (OPERATION:{name: "rising_edge"}) - [READS] -> (CONCEPT:{name: "departing"})
-    (OPERATION:{name: "rising_edge"}) - [READS] -> (CONCEPT:{name: "arriving"})
+    (OPERATION:{name: "rising_edge"}) - [BEFORE] -> (VALUE:{name: "0"})
+    (OPERATION:{name: "rising_edge"}) - [AFTER] -> (VALUE:{name: "1"})
     (OPERATION:{name: "rising_edge"}) - [USES] -> (OPERATION:{name: "to_x01"})
-    (OPERATION:{name: "falling_edge"}) - [READS] -> (CONCEPT:{name: "departing"})
-    (OPERATION:{name: "falling_edge"}) - [READS] -> (CONCEPT:{name: "arriving"})
+    (OPERATION:{name: "falling_edge"}) - [BEFORE] -> (VALUE:{name: "1"})
+    (OPERATION:{name: "falling_edge"}) - [AFTER] -> (VALUE:{name: "0"})
     (OPERATION:{name: "falling_edge"}) - [USES] -> (OPERATION:{name: "to_x01"})
   |
 
   @synchronicity ~S|
     (STANDARD:{name: "IEEE1164"}) - [ENABLES] -> (CONCEPT:{name: "synchronicity", description: "With one breath, with one flow, you will know synchronicity."})
-    (CONCEPT:{name: "synchronicity"}) <- [ENUMERATES] -
-    (CONCEPT:{name: "clock", description: "I am the heartbeat. I mark the moment of knowing."})
-    (CONCEPT:{name: "synchronicity"}) <- [ENUMERATES] -
-    (CONCEPT:{name: "sample", description: "I am what is captured at the edge. I am the world between heartbeats."})
-    (CONCEPT:{name: "synchronicity"}) <- [ENUMERATES] -
-    (CONCEPT:{name: "domain", description: "I am all that shares a heartbeat."})
-    (OPERATION:{name: "rising_edge"}) - [MARKS] -> (CONCEPT:{name: "clock"})
-    (CONCEPT:{name: "clock"}) - [GOVERNS] -> (CONCEPT:{name: "sample"})
-    (CONCEPT:{name: "sample"}) - [BELONGS_TO] -> (CONCEPT:{name: "domain"})
+    (SIGNAL:{name: "clock", description: "I am the heartbeat. I mark the moment of knowing."}) - [INSTANCE_OF] -> (SIGNAL:{name: "signal"})
+    (VALUE:{name: "sample", description: "I am what is captured at the edge. I am the world between heartbeats."}) - [INSTANCE_OF] -> (VALUE:{name: "value"})
+    (CONCEPT:{name: "synchronicity"}) - [NEEDS] -> (SIGNAL:{name: "clock"})
+    (OPERATION:{name: "rising_edge"}) - [MARKS] -> (SIGNAL:{name: "clock"})
+    (SIGNAL:{name: "clock"}) - [GOVERNS] -> (VALUE:{name: "sample"})
+    (SIGNAL:{name: "clock"}) - [GATHERS] -> (CONCEPT:{name: "domain", description: "I am all that shares a heartbeat."})
+    (VALUE:{name: "sample"}) - [BELONGS_TO] -> (CONCEPT:{name: "domain"})
   |
 
   # ─── Yarn as text ───────────────────────────────────────────────────────
@@ -211,7 +221,7 @@ defmodule Diffo.Ieee1164 do
       {"Some values impose their strength, others yield", strength: @strength},
       {"Some values remain true to self", identity_under_resolution: @identity_under_resolution},
       {"Sometimes uncles must resolve things", resolutions: @resolutions},
-      {"There are actually two clans", is_x: @is_x},
+      {"There are actually two clans", clans: @clans},
       {"But we get things done", operations: @operations},
       {"And this is how", logic_operations: @logic_operations},
       {"We know of other worlds", worlds: @worlds},
@@ -236,7 +246,7 @@ defmodule Diffo.Ieee1164 do
   def strength, do: section(:strength)
   def identity_under_resolution, do: section(:identity_under_resolution)
   def resolutions, do: section(:resolutions)
-  def is_x, do: section(:is_x)
+  def clans, do: section(:clans)
   def operations, do: section(:operations)
   def logic_operations, do: section(:logic_operations)
   def worlds, do: section(:worlds)
@@ -279,7 +289,7 @@ defmodule Diffo.Ieee1164 do
 
   Each element is a self-contained `%Artefact{}` for that section.
 
-      Diffo.Ieee1164.stream() |> Enum.take(3)
+      Ieee1164.stream() |> Enum.take(3)
   """
   def stream do
     Stream.map(yarn(), fn {title, [{_key, text}]} ->
@@ -293,7 +303,7 @@ defmodule Diffo.Ieee1164 do
   The first element is `:standard` alone. Each subsequent element folds
   the next section into the growing whole — the story as it is told.
 
-      Diffo.Ieee1164.stream_integrated() |> Enum.each(&inspect/1)
+      Ieee1164.stream_integrated() |> Enum.each(&inspect/1)
   """
   def stream_integrated do
     [{first_title, [{_key, first_text}]} | rest] = yarn()

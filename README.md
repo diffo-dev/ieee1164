@@ -1,6 +1,6 @@
 # Ieee1164
 
-Diffo.IEEE1164 is about knowledge about IEEE1164.
+Ieee1164 is about knowledge about IEEE1164.
 
 IEEE1164 is a building block in our digital universe. Without it we wouldn't know the chemistry of advanced communications, devices, cloud, AI and the like.
 

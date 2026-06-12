@@ -1,7 +1,7 @@
-# SPDX-FileCopyrightText: 2026 diffo-dev contributors
+# SPDX-FileCopyrightText: 2026 diffo-dev
 # SPDX-License-Identifier: Apache-2.0
 
-defmodule Diffo.Ieee1164.Resolver do
+defmodule Ieee1164.Resolver do
   @moduledoc """
   Resolves `std_ulogic` into `std_logic` by *deriving* the resolution rules
   from the ieee1164 knowledge graph — never by transcribing the standard's
@@ -82,7 +82,7 @@ defmodule Diffo.Ieee1164.Resolver do
 
   @doc false
   def rules do
-    graph = Diffo.Ieee1164.ieee1164().graph
+    graph = Ieee1164.ieee1164().graph
     name = Map.new(graph.nodes, fn n -> {n.id, n.properties["name"]} end)
     edges = Enum.map(graph.relationships, fn r -> {name[r.from_id], r.type, name[r.to_id]} end)
 
@@ -92,10 +92,10 @@ defmodule Diffo.Ieee1164.Resolver do
     dom = dominance(edges, tier_values)
     tier = tiers(tier_values, dom)
 
-    unknowable =
-      for {a, "UNKNOWABLE", _} <- edges, a in tier_values, into: MapSet.new(), do: a
+    unobservable =
+      for {a, "UNOBSERVABLE", _} <- edges, a in tier_values, into: MapSet.new(), do: a
 
-    %{resolves_as: resolves_as, tier: tier, conflict: conflicts(tier_values, tier, unknowable)}
+    %{resolves_as: resolves_as, tier: tier, conflict: conflicts(tier_values, tier, unobservable)}
   end
 
   # `{stronger, weaker}` pairs. FORCES/WEAKLY_FORCES are pairwise; POISONS and
@@ -162,10 +162,10 @@ defmodule Diffo.Ieee1164.Resolver do
   end
 
   # For an equal-strength conflict at tier `t`, the result is the lowest
-  # unknowable value strictly above `t` — X for the forcing tier, W for the weak.
-  defp conflicts(vs, tier, unknowable) do
+  # unobservable value strictly above `t` — X for the forcing tier, W for the weak.
+  defp conflicts(vs, tier, unobservable) do
     for t <- vs |> Enum.map(&Map.fetch!(tier, &1)) |> Enum.uniq(),
-        up = vs |> Enum.filter(&(MapSet.member?(unknowable, &1) and Map.fetch!(tier, &1) > t)),
+        up = vs |> Enum.filter(&(MapSet.member?(unobservable, &1) and Map.fetch!(tier, &1) > t)),
         up != [],
         into: %{} do
       {t, Enum.min_by(up, &Map.fetch!(tier, &1))}

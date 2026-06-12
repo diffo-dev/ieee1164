@@ -1,7 +1,7 @@
-# SPDX-FileCopyrightText: 2026 diffo-dev contributors
+# SPDX-FileCopyrightText: 2026 diffo-dev
 # SPDX-License-Identifier: Apache-2.0
 
-defmodule Diffo.Ieee1164.Parser do
+defmodule Ieee1164.Parser do
   @moduledoc """
   Parses ieee1164 Cypher-style yarn strings into `%Artefact{}` structs.
 

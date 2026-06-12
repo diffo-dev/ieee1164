@@ -1,10 +1,10 @@
-# SPDX-FileCopyrightText: 2026 diffo-dev contributors
+# SPDX-FileCopyrightText: 2026 diffo-dev
 # SPDX-License-Identifier: Apache-2.0
 
-defmodule Diffo.Ieee1164.ResolverTest do
+defmodule Ieee1164.ResolverTest do
   use ExUnit.Case, async: true
 
-  alias Diffo.Ieee1164.Resolver
+  alias Ieee1164.Resolver
 
   # The hard-coded resolution_table from std_logic_1164-body.vhdl, in the
   # standard's order: U X 0 1 Z W L H -. This is the ORACLE — the resolver
