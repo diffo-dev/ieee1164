@@ -7,7 +7,7 @@ defmodule Ieee1164.MixProject do
   def project do
     [
       app: :ieee1164,
-      version: "0.1.1",
+      version: "0.2.0",
       elixir: "~> 1.18",
       description:
         "Knowledge about IEEE 1164 — the nine-value logic standard at the heart of VHDL simulation.",
