@@ -164,6 +164,25 @@ From here, the labels can fall away. What remains is the shape of the knowledge.
 
 ---
 
+## The worlds are written in the matrix
+
+There is one more thing the shape was hiding. The values run in **logical order** — `U X 0 1 Z W L H -`, indices `0..8` — not their ASCII codepoints. That choice was deliberate, and it pays off here: each projection world is a **contiguous block** of the matrix, nested along the diagonal.
+
+```elixir
+worlds_svg = read_glyph.("std_logic_1164_worlds.svg")
+Kino.HTML.new(~s(<div style="text-align:center;padding:1rem;">#{worlds_svg}</div>))
+```
+
+`X01` sits inside `X01Z` and `UX01`, both inside `UX01Z` — the five-value simulation core. And each of these is **closed**: resolve any two of its members and the answer is still one of its members. A world is a place you cannot leave by resolving.
+
+`bit` is the exception, and the exception is the whole point. `bit` is `{0, 1}` — the IEEE 1076 base type — and `0` against `1` resolves to `X`, which is not in `{0, 1}`. It escapes. That is *why* `bit` is an unresolved type, and why `X01` is the smallest world that closes: it is `bit` plus the `X` that conflict makes. You cannot draw `bit` as a closed region on the std_logic matrix, because it is not one.
+
+And the boxes show two things the line alone cannot. **`UX01Z` is the join** — exactly `UX01` and `X01Z` overlaid, the diamond from the yarn made visible. The only cells neither smaller world holds are the two corners where `U` meets `Z`, and the matrix fills them with `U`: the join completes itself. And **`U` is carved from `X`** — all along the `U` row and column, where `U` meets `X`, the cell resolves to `U`. The deeper unknown overrides the shallower; `U` is the very distinction `UX01` adds on top of `X01`.
+
+ASCII order would have sorted the values `- 0 1 H L U W X Z`, scattering every world across the grid. The logical order *is* the world hierarchy, written as a line.
+
+---
+
 ## Memorialise
 
 You have made a significant journey into an amazing land.
