@@ -28,3 +28,6 @@ CLAUDE.md
 
 # macOS Finder metadata, anywhere in the tree.
 .DS_Store
+
+# Generated shareable PNGs (mix ieee1164.gen_pngs); SVGs are the source of truth
+images/glyphs/*.png

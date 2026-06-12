@@ -7,7 +7,7 @@ defmodule Ieee1164.MixProject do
   def project do
     [
       app: :ieee1164,
-      version: "0.1.1",
+      version: "0.2.0",
       elixir: "~> 1.18",
       description:
         "Knowledge about IEEE 1164 — the nine-value logic standard at the heart of VHDL simulation.",
@@ -52,7 +52,8 @@ defmodule Ieee1164.MixProject do
       {:artefact_kino, "~> 0.3"},
       {:artefact, "~> 0.3"},
       {:ex_doc, "~> 0.34", only: :dev, runtime: false},
-      {:igniter, "~> 0.6", only: [:dev, :test]}
+      {:igniter, "~> 0.6", only: [:dev, :test]},
+      {:resvg, "~> 0.5.0", only: :dev, runtime: false}
     ]
   end
 
